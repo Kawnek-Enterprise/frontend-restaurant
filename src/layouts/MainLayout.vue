@@ -25,10 +25,22 @@
       bordered
     >
       <q-list>
-        <q-item-label header>
-          <!--  -->
-        </q-item-label>
+        <q-item-label>
 
+        </q-item-label>
+        <q-item to="/">
+          <q-item-section>
+            Home
+          </q-item-section>
+        </q-item>
+        <q-item
+          href="https://kawnekhotel.bdinfotech.in"
+          target="_blank"
+        >
+          <q-item-section>
+            Admin
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 

@@ -38,6 +38,8 @@ async function onClickConfirm() {
       menu_items: menu.selectedList,
     })
     main.resetOrder();
+
+    alert('go to https://kawnekhotel.bdinfotech.in to view orders');
   } catch (error) {
     console.error(error.message);
   }
@@ -68,6 +70,9 @@ function setSelectedList() {
     menu.list.filter(
       val => val.quantity > 0
     )
+  if (menu.selectedList?.length == 0) {
+    alert('Select atleast one menu item')
+  }
 }
 export {
   menu,

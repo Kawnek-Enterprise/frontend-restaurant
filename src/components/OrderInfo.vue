@@ -39,6 +39,7 @@
         <div class="row justify-end q-mt-md">
           <q-btn
             v-close-popup
+            color="primary"
             label="confirm"
           ></q-btn>
         </div>

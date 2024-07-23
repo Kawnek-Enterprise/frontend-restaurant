@@ -50,9 +50,12 @@
             </div>
             <div>
               <q-btn
+                :disable="!main.form.dining_table_id || !main.form.name"
                 @click="() => {
-                  menu.setSelectedList();
-                  main.openOrderDialog = true;
+                  menu.setSelectedList()
+                    ;
+                  if (menu.selectedList?.length > 0)
+                    main.openOrderDialog = true;
                 }"
                 title="Summary"
                 outline
