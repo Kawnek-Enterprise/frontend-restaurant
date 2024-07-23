@@ -64,7 +64,7 @@ module.exports = configure(function (ctx) {
         API_URL: ctx.dev ? //development
           'http://localhost:24071/api'
           : //production
-          'http://129.154.47.108/api'
+          'https://kawnekhotel.bdinfotech.in/api'
       },
       // rawDefine: {}
       // ignorePublicFolder: true,
