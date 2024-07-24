@@ -1,5 +1,6 @@
 import { api } from 'src/boot/axios';
 import { reactive } from 'vue';
+import { orders } from './orders/orders';
 
 const main = reactive({
   openOrderDialog: false,
@@ -33,21 +34,42 @@ function resetOrder() {
 }
 async function onClickConfirm() {
   try {
-    const res = await api.post(`orders`, {
+    const res = await api.post(`orders${$route.params.id ? `/${$route.params.id}` : ''}`, {
       ...main.form,
+      _method: $route.params?.id ? 'patch' : 'post',
       menu_items: menu.selectedList,
     })
     main.resetOrder();
-
-    alert('go to https://kawnekhotel.bdinfotech.in to view orders');
+    $q.notify('go to https://kawnekhotel.bdinfotech.in to view orders')
+    $router.push('/orders')
+    // alert('go to https://kawnekhotel.bdinfotech.in to view orders');
   } catch (error) {
     console.error(error.message);
   }
 }
 async function getMenuItems() {
   try {
+    let endpoint = `menu-items`
+    if ($route.params?.id) {
+      const res = await api.get(`orders/${$route.params.id}`);
+      orders.detail = res.data;
+
+      main.form.dining_table_id = res.data.dining_table_id
+      main.form.name = res.data.name
+    }
     const res = await api.get(`menu-items`);
     menu.list = res.data;
+    menu.list.forEach((menuItem, menuItemIndex) => {
+      if (orders.detail?.menu_items?.constructor === Array) {
+        const orderItemIndex = orders.detail.menu_items.findIndex(
+          orderItem =>
+            orderItem.id == menuItem.id
+        )
+        if (orderItemIndex > -1) {
+          menu.list[menuItemIndex]['quantity'] = parseInt(orders.detail.menu_items[orderItemIndex].quantity)
+        }
+      }
+    });
   } catch (error) {
     console.error(error.message);
 

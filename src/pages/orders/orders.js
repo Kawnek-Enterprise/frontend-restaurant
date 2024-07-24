@@ -4,6 +4,9 @@ import { reactive } from "vue";
 const orders = reactive({
   list: [],
   data: {},
+  detail: {
+    menu_items: [],
+  },
   pagination: {
     rowsPerPage: 5,
     rowsNumber: 0
