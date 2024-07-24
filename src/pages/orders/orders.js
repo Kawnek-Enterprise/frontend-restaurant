@@ -11,7 +11,8 @@ const orders = reactive({
     rowsPerPage: 5,
     rowsNumber: 0
   },
-  getOrders
+  getOrders,
+  getDetail,
 })
 
 async function getOrders(props) {
@@ -31,6 +32,15 @@ async function getOrders(props) {
     orders.pagination.rowsNumber = res.data?.total ?? 0;
     orders.list = res.data?.data ?? res.data;
     orders.data = res.data;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+async function getDetail() {
+  try {
+    const res = await api.get(`orders/${$route.params.id}`)
+    orders.detail = res.data;
   } catch (error) {
     console.error(error.message);
   }
