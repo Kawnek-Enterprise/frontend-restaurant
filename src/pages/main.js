@@ -31,6 +31,13 @@ function resetOrder() {
   main.form.name = undefined;
   main.openInfoDialog = false;
   main.openOrderDialog = false;
+  orders.detail = {
+    id: undefined,
+    name: undefined,
+    dining_table_id: undefined,
+    room_id: undefined,
+    menu_items: [],
+  };
 }
 async function onClickConfirm() {
   try {

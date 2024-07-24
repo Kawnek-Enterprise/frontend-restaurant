@@ -5,8 +5,13 @@ const orders = reactive({
   list: [],
   data: {},
   detail: {
+    id: undefined,
+    name: undefined,
+    dining_table_id: undefined,
+    room_id: undefined,
     menu_items: [],
   },
+  total_amount: 0,
   pagination: {
     rowsPerPage: 5,
     rowsNumber: 0
@@ -39,8 +44,13 @@ async function getOrders(props) {
 
 async function getDetail() {
   try {
+    orders.total_amount = 0;
     const res = await api.get(`orders/${$route.params.id}`)
     orders.detail = res.data;
+    orders.total_amount = orders.detail.menu_items.reduce(
+      (p, c) => p + parseFloat(c.amount), 0
+    )
+
   } catch (error) {
     console.error(error.message);
   }

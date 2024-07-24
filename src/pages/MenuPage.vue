@@ -6,10 +6,11 @@
 
 <script setup>
 import { onMounted } from "vue";
-import { diningTable, menu } from "./main";
+import { diningTable, main, menu } from "./main";
 import OrderForm from 'src/components/OrderForm.vue'
 
 onMounted(() => {
+  main.resetOrder();
   menu.getMenuItems();
   diningTable.getDiningTables();
 })

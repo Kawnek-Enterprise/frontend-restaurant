@@ -10,20 +10,40 @@
     >
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
-          <q-btn
-            :to="{
-              name: 'edit-order',
-              params: {
-                id: props.row.id
-              }
-            }"
-            rounded
-            size="sm"
-            color="primary"
-            icon="edit"
-          >
+          <div class="row q-col-gutter-sm">
+            <div>
+              <q-btn
+                :to="{
+                  name: 'order-detail',
+                  params: {
+                    id: props.row.id
+                  }
+                }"
+                rounded
+                size="sm"
+                color="primary"
+                icon="workspaces"
+              >
 
-          </q-btn>
+              </q-btn>
+            </div>
+            <div>
+              <q-btn
+                :to="{
+                  name: 'edit-order',
+                  params: {
+                    id: props.row.id
+                  }
+                }"
+                rounded
+                size="sm"
+                color="primary"
+                icon="edit"
+              >
+
+              </q-btn>
+            </div>
+          </div>
         </q-td>
       </template>
     </q-table>
@@ -35,12 +55,14 @@ import { onMounted, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import { useRoute, useRouter } from 'vue-router';
 import { orders } from 'src/pages/orders/orders';
+import { main } from '../main';
 
 const q = useQuasar()
 const router = useRouter()
 const route = useRoute()
 
 onMounted(() => {
+  main.resetOrder();
   orders.getOrders();
 });
 

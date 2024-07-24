@@ -14,8 +14,13 @@ const routes = [
       },
       {
         name: 'edit-order',
-        path: 'orders/:id',
+        path: 'update-order/:id',
         component: () => import('src/pages/orders/EditOrderPage.vue')
+      },
+      {
+        name: 'order-detail',
+        path: 'orders/:id',
+        component: () => import('src/pages/orders/OrderDetailPage.vue')
       },
     ]
   },
