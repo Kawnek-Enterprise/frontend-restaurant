@@ -28,22 +28,29 @@
         <q-item-label>
 
         </q-item-label>
-        <q-item to="/">
+
+
+        <q-item
+          to="/"
+          :active="$route.name == 'home'"
+        >
           <q-item-section>
             Home
           </q-item-section>
         </q-item>
+
+        <q-item to="orders">
+          <q-item-section>
+            Orders
+          </q-item-section>
+        </q-item>
+        <q-separator class="q-mt-md"></q-separator>
         <q-item
           href="https://kawnekhotel.bdinfotech.in"
           target="_blank"
         >
           <q-item-section>
             Admin
-          </q-item-section>
-        </q-item>
-        <q-item to="orders">
-          <q-item-section>
-            Orders
           </q-item-section>
         </q-item>
       </q-list>
