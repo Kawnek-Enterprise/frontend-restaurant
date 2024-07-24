@@ -41,6 +41,11 @@
             Admin
           </q-item-section>
         </q-item>
+        <q-item to="orders">
+          <q-item-section>
+            Orders
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
