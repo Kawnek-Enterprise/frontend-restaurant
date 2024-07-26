@@ -160,12 +160,3 @@ const columns = [
   },
 ]
 </script>
-
-<style lang="scss">
-@media only screen and (max-width: 400px) {
-  td {
-    padding: 2px !important;
-  }
-
-}
-</style>

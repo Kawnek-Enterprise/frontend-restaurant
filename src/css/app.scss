@@ -1,1 +1,7 @@
 // app global css in SCSS form
+
+@media only screen and (max-width: 400px) {
+  td {
+    padding: 2px !important;
+  }
+}
