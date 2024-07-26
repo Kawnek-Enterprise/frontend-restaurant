@@ -72,7 +72,7 @@
           {{ props.row.name }}
           <div
             class="text-caption"
-            style="max-width: 20vw; overflow: hidden; text-wrap: wrap; word-wrap: normal; line-height: 90%; "
+            style="max-width: 18vw; overflow: hidden; text-wrap: wrap; word-wrap: normal; line-height: 90%; "
           >
             {{ props.row.description }}
           </div>
@@ -81,7 +81,7 @@
           {{ props.row.price }}
         </q-td>
         <q-td class="">
-          <div class="row q-col-gutter-sm items-center no-wrap">
+          <div class="row q-col-gutter-xs items-center no-wrap">
             <div>
               <q-btn
                 class="text-non-selectable"
