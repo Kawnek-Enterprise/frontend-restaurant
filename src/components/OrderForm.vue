@@ -12,18 +12,8 @@
     row-key="id"
   >
     <template v-slot:top>
-      <div class="row justify-between fit items-center">
+      <div class="row justify-between fit items-center q-gutter-sm">
         <div>
-          <!-- <q-select
-              dense
-              outlined
-              :option-label="(val) => `Table ${val.number}`"
-              option-value="id"
-              emit-value
-              map-options
-              v-model="main.form.dining_table_id"
-              :options="diningTable.list"
-            ></q-select> -->
           <q-input
             class="q-mt-sm"
             dense
@@ -80,7 +70,10 @@
         </q-td>
         <q-td>
           {{ props.row.name }}
-          <div class="text-caption">
+          <div
+            class="text-caption"
+            style="max-width: 20vw; overflow: hidden; text-wrap: wrap; word-wrap: normal; line-height: 90%; "
+          >
             {{ props.row.description }}
           </div>
         </q-td>
@@ -167,3 +160,12 @@ const columns = [
   },
 ]
 </script>
+
+<style lang="scss">
+@media only screen and (max-width: 400px) {
+  td {
+    padding: 2px !important;
+  }
+
+}
+</style>
