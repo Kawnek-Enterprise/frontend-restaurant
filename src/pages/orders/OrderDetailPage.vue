@@ -99,7 +99,7 @@
 
               </q-td>
               <q-td class="text-right text-bold">
-                {{ orders.total_amount }}
+                {{ orders.total_amount.toFixed(2) }}
               </q-td>
 
             </tr>
