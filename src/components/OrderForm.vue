@@ -81,7 +81,7 @@
           {{ props.row.price }}
         </q-td>
         <q-td class="">
-          <div class="row q-col-gutter-sm items-center">
+          <div class="row q-col-gutter-sm items-center no-wrap">
             <div>
               <q-btn
                 class="text-non-selectable"
