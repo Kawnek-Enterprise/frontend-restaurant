@@ -32,3 +32,4 @@ yarn-error.log*
 # local .env files
 .env.local*
 .firebase/hosting.ZGlzdC9zcGE.cache
+public/storage
