@@ -61,11 +61,12 @@
       <q-tr>
         <q-td auto-width>
           <q-img
+            no-spinner
             height="64px"
             width="64px"
             fit="cover"
             position="center"
-            :src="`storage/${props.row.image_path}`"
+            :src="`${srvUrl}${props.row.image_path}`"
           ></q-img>
         </q-td>
         <q-td>
@@ -134,7 +135,7 @@ import { onMounted } from "vue";
 import OrderSummary from 'src/components/OrderSummary.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
 
-
+const srvUrl = process.env.BACKEND
 
 
 const columns = [
