@@ -11,7 +11,5 @@ import OrderForm from 'src/components/OrderForm.vue'
 
 onMounted(() => {
   main.resetOrder();
-  menu.getMenuItems();
-  diningTable.getDiningTables();
 })
 </script>
