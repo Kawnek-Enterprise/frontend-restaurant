@@ -46,7 +46,7 @@
         </q-item>
         <q-separator class="q-mt-md"></q-separator>
         <q-item
-          href="https://kawnekhotel.bdinfotech.in"
+          :href="serverUrl"
           target="_blank"
         >
           <q-item-section>
@@ -63,6 +63,7 @@
 </template>
 
 <script setup>
+import { serverUrl } from 'src/boot/main';
 import { diningTable, menu } from 'src/pages/main';
 import { onMounted, ref } from 'vue'
 

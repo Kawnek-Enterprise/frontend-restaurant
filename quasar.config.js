@@ -21,8 +21,8 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
-
       'axios',
+      'main',
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -62,9 +62,9 @@ module.exports = configure(function (ctx) {
       // analyze: true,
       env: {
         API_URL: ctx.dev ? //development
-          'http://localhost:24071/api'
+          'http://localhost:24071'
           : //production
-          'https://kawnekhotel.bdinfotech.in/api',
+          'https://restaurantadmin.kawnek.com',
         BACKEND: ctx.dev ? //development
           'http://localhost:24071/'
           : //production

@@ -1,6 +1,7 @@
 import { api } from 'src/boot/axios';
 import { reactive } from 'vue';
 import { orders } from './orders/orders';
+import { serverUrl } from 'src/boot/main';
 
 const main = reactive({
   openOrderDialog: false,
@@ -47,9 +48,8 @@ async function onClickConfirm() {
       menu_items: menu.selectedList,
     })
     main.resetOrder();
-    $q.notify('go to https://kawnekhotel.bdinfotech.in to view orders')
+    $q.notify(`go to ${serverUrl} to view orders`)
     $router.push('/orders')
-    // alert('go to https://kawnekhotel.bdinfotech.in to view orders');
   } catch (error) {
     console.error(error.message);
   }
