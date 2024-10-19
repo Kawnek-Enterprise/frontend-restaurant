@@ -35,3 +35,4 @@ yarn-error.log*
 public/storage
 public/storage.lnk
 public/assets
+.backup
