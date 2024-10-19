@@ -1,8 +1,8 @@
 {
   "name": "app-hotel-restaurant",
   "version": "0.0.1",
-  "description": "Kawnek Hotel and Restaurant Software",
-  "productName": "Kawnek Hotel and Restaurant",
+  "description": "Kawnek Restaurant Software",
+  "productName": "Kawnek Restaurant",
   "author": "ys-grouse <malsawma7777@gmail.com>",
   "private": true,
   "scripts": {
