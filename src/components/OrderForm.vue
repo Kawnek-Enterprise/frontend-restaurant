@@ -30,12 +30,18 @@
           <div class="col">
             {{ props.row.name }}
           </div>
-          <div
-            class="text-caption"
-            style="max-width: 18vw; overflow: hidden; text-wrap: wrap; word-wrap: normal; line-height: 90%; "
+          <q-item-label
+            style="max-width: 40vw;"
+            class="text-ellipsis"
+            lines="1"
           >
             {{ props.row.description }}
-          </div>
+          </q-item-label>
+          <p
+            v-if="!props.row.is_available"
+            class="text-red"
+            style="white-space: nowrap;"
+          >Not available</p>
           <div>
             ₹{{ props.row.price }}/-
           </div>
@@ -59,6 +65,7 @@
             </div>
             <div class="flex flex-center">
               <q-input
+                :disable="!props.row.is_available"
                 outlined
                 style="min-width: 50px; max-width: 50px; display: inline;"
                 dense
@@ -68,6 +75,7 @@
             </div>
             <div>
               <q-btn
+                :disable="!props.row.is_available"
                 class="text-non-selectable"
                 dense
                 round
