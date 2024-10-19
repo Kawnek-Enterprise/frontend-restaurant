@@ -61,13 +61,9 @@ module.exports = configure(function (ctx) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        API_URL: ctx.dev ? //development
-          'http://localhost:24071'
-          : //production
-          'https://restaurantadmin.kawnek.com',
-        BACKEND: ctx.dev ? //development
-          'http://localhost:24071/'
-          : //production
+        srvUrl: ctx.dev ? //development
+          'http://api-restaurant.test/'
+          :
           '/',
         // srvUrl: 'URL_ADDRESS',
 
