@@ -15,6 +15,7 @@ const main = reactive({
 })
 
 const menu = reactive({
+  loadingItems: false,
   filter: '',
   list: [],
   selectedList: [],
@@ -48,7 +49,6 @@ async function onClickConfirm() {
       menu_items: menu.selectedList,
     })
     main.resetOrder();
-    $q.notify(`go to ${serverUrl} to view orders`)
     $router.push('/orders')
   } catch (error) {
     console.error(error.message);
@@ -56,6 +56,7 @@ async function onClickConfirm() {
 }
 async function getMenuItems() {
   try {
+    menu.loadingItems = true;
     let endpoint = `menu-items`
     if ($route.params?.id) {
       const res = await api.get(`orders/${$route.params.id}`);
@@ -77,7 +78,9 @@ async function getMenuItems() {
         }
       }
     });
+    menu.loadingItems = false;
   } catch (error) {
+    menu.loadingItems = false;
     console.error(error.message);
 
   }
@@ -100,7 +103,7 @@ function setSelectedList() {
       val => val.quantity > 0
     )
   if (menu.selectedList?.length == 0) {
-    alert('Select atleast one menu item')
+    $q.notify('Please add menu items')
   }
 }
 export {

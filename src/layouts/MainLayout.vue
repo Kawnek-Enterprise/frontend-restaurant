@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="q-py-xs">
         <q-btn
           flat
           dense
@@ -11,9 +11,20 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Kawnek Hotel & Restaurant
-        </q-toolbar-title>
+
+        <q-input
+          dense
+          borderless
+          class="q-px-xs q-ml-sm "
+          style="border: 1px solid white; border-radius: 4px; min-width: 200px;"
+          color="white"
+          :class="{
+            'full-width': $q.screen.lt.sm,
+          }"
+          v-model="menu.filter"
+          type="text"
+          label="Search"
+        />
 
         <!-- <div>Quasar v{{ $q.version }}</div> -->
       </q-toolbar>
@@ -25,11 +36,18 @@
       bordered
     >
       <q-list>
-        <q-item-label>
-
-        </q-item-label>
-
-
+        <q-item class="bg-primary text-white">
+          <q-item-section side>
+            <q-img
+              width="32px"
+              height="32px"
+              src="/icons/kawnekrestaurant-icon.png"
+            ></q-img>
+          </q-item-section>
+          <q-item-section>
+            Kawnek Restaurant
+          </q-item-section>
+        </q-item>
         <q-item
           to="/"
           :active="$route.name == 'home'"
@@ -45,10 +63,7 @@
           </q-item-section>
         </q-item>
         <q-separator class="q-mt-md"></q-separator>
-        <q-item
-          :href="serverUrl"
-          target="_blank"
-        >
+        <q-item :href="`${serverUrl}admin`">
           <q-item-section>
             Admin
           </q-item-section>

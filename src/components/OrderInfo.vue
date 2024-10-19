@@ -15,6 +15,7 @@
       <q-separator></q-separator> -->
       <q-card-section style="">
         <q-select
+          autofocus
           label="Table"
           dense
           outlined

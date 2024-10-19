@@ -1,2 +1,2 @@
-const serverUrl = process.env.API_URL;
+const serverUrl = process.env.srvUrl;
 export { serverUrl }

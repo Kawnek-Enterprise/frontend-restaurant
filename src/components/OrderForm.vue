@@ -1,62 +1,18 @@
 <template>
   <q-table
+    :loading="menu.loadingItems"
     flat
     bordered
     hide-header
     hide-bottom
     title="Menu"
+    class="q-pb-md q-mb-xl"
     :filter="menu.filter"
     :rows-per-page-options="[0]"
     :rows="menu.list"
     :columns="columns"
     row-key="id"
   >
-    <template v-slot:top>
-      <div class="row justify-between fit items-center q-gutter-sm">
-        <div>
-          <q-input
-            class="q-mt-sm"
-            dense
-            outlined
-            style="width: 200px;"
-            v-model="menu.filter"
-            type="text"
-            label="Search"
-          />
-        </div>
-        <div class="row q-col-gutter-xs">
-          <div>
-            <q-btn
-              @click="() => {
-                main.openInfoDialog = true;
-              }"
-              title="Summary"
-              outline
-              rounded
-              color="primary"
-              icon="workspaces"
-            ></q-btn>
-          </div>
-          <div>
-            <q-btn
-              :disable="!main.form.dining_table_id || !main.form.name"
-              @click="() => {
-                menu.setSelectedList()
-                  ;
-                if (menu.selectedList?.length > 0)
-                  main.openOrderDialog = true;
-              }"
-              title="Summary"
-              outline
-              rounded
-              color="primary"
-              icon="receipt_long"
-            ></q-btn>
-          </div>
-        </div>
-
-      </div>
-    </template>
     <template v-slot:body="props">
       <q-tr>
         <q-td auto-width>
@@ -70,17 +26,23 @@
           ></q-img>
         </q-td>
         <q-td>
-          {{ props.row.name }}
+
+          <div class="col">
+            {{ props.row.name }}
+          </div>
           <div
             class="text-caption"
             style="max-width: 18vw; overflow: hidden; text-wrap: wrap; word-wrap: normal; line-height: 90%; "
           >
             {{ props.row.description }}
           </div>
+          <div>
+            ₹{{ props.row.price }}/-
+          </div>
+
+
         </q-td>
-        <q-td>
-          {{ props.row.price }}
-        </q-td>
+
         <q-td class="">
           <div class="row q-col-gutter-xs items-center no-wrap">
             <div>
@@ -102,7 +64,7 @@
                 dense
                 v-model="props.row.quantity"
               ></q-input>
-              <!-- :model-value="parseInt(Math.random() * 10)" -->
+
             </div>
             <div>
               <q-btn
@@ -119,13 +81,47 @@
           </div>
         </q-td>
       </q-tr>
-
     </template>
   </q-table>
   <order-summary />
   <order-info />
 
 
+  <div
+    class="row q-col-gutter-xs q-pa-sm bg-white justify-end "
+    style="position: fixed; width: 100vw;left: 0; bottom: 0; border-top: 1px solid #dfdfdf;"
+  >
+    <div>
+      <q-btn
+        @click="() => {
+          main.openInfoDialog = true;
+        }"
+        title="Table Info"
+        label="Table Info"
+        outline
+        rounded
+        color="primary"
+        icon="workspaces"
+      ></q-btn>
+    </div>
+    <div>
+      <q-btn
+        :disable="!main.form.dining_table_id || !main.form.name"
+        @click="() => {
+          menu.setSelectedList();
+          if (menu.selectedList?.length > 0)
+            main.openOrderDialog = true;
+        }"
+        title="Summary"
+        label="Summary"
+        outline
+        rounded
+        color="primary"
+        icon="receipt_long"
+      ></q-btn>
+    </div>
+
+  </div>
 </template>
 
 
@@ -135,7 +131,7 @@ import { onMounted } from "vue";
 import OrderSummary from 'src/components/OrderSummary.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
 
-const srvUrl = process.env.BACKEND
+const srvUrl = process.env.srvUrl;
 
 
 const columns = [
