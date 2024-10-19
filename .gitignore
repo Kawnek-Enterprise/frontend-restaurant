@@ -34,3 +34,4 @@ yarn-error.log*
 .firebase/hosting.ZGlzdC9zcGE.cache
 public/storage
 public/storage.lnk
+public/assets
