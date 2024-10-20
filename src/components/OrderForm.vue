@@ -16,77 +16,78 @@
     <template v-slot:body="props">
       <q-tr>
         <q-td auto-width>
-          <q-img
-            no-spinner
-            height="64px"
-            width="64px"
-            fit="cover"
-            position="center"
-            :src="`${srvUrl}${props.row.image_path}`"
-          ></q-img>
-        </q-td>
-        <q-td>
-
-          <div class="col">
-            {{ props.row.name }}
-          </div>
-          <q-item-label
-            style="max-width: 40vw;"
-            class="text-ellipsis"
-            lines="1"
+          <div
+            style="margin: auto; width: min(500px, 100%);"
+            class="q-pa-md"
           >
-            {{ props.row.description }}
-          </q-item-label>
-          <p
-            v-if="!props.row.is_available"
-            class="text-red"
-            style="white-space: nowrap;"
-          >Not available</p>
-          <div>
-            ₹{{ props.row.price }}/-
+            <div style="border-radius: 1rem; overflow: hidden">
+              <q-img
+                ratio="1.5"
+                no-spinner
+                fit="cover"
+                position="center"
+                :src="`${srvUrl}${props.row.image_path}`"
+              ></q-img>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="text-h6">
+                  {{ props.row.name }}
+                </div>
+                <p
+                  v-if="!props.row.is_available"
+                  class="text-red"
+                  style="white-space: nowrap;"
+                >
+                  Not available
+                </p>
+              </div>
+              <div class="col-auto">
+                ₹{{ props.row.price }}/-
+              </div>
+            </div>
+            <div class="full-width row q-col-gutter-xs items-center no-wrap">
+              <div>
+                <q-btn
+                  class="text-non-selectable"
+                  dense
+                  round
+                  outline
+                  size="sm"
+                  color="primary"
+                  icon="remove"
+                  @click="props.row.quantity > 1 ? props.row.quantity-- : props.row.quantity = undefined"
+                ></q-btn>
+              </div>
+
+              <div class="col">
+                <q-input
+                  class=" quantity"
+                  borderless
+                  :disable="!props.row.is_available"
+                  dense
+                  v-model="props.row.quantity"
+                ></q-input>
+              </div>
+
+              <div>
+                <q-btn
+                  :disable="!props.row.is_available"
+                  class="text-non-selectable"
+                  dense
+                  round
+                  outline
+                  size="sm"
+                  color="primary"
+                  icon="add"
+                  @click="props.row.quantity ? props.row.quantity++ : props.row.quantity = 1"
+                ></q-btn>
+              </div>
+            </div>
+
           </div>
 
-
-        </q-td>
-
-        <q-td class="">
-          <div class="row q-col-gutter-xs items-center no-wrap">
-            <div>
-              <q-btn
-                class="text-non-selectable"
-                dense
-                round
-                outline
-                size="sm"
-                color="primary"
-                icon="remove"
-                @click="props.row.quantity > 1 ? props.row.quantity-- : props.row.quantity = undefined"
-              ></q-btn>
-            </div>
-            <div class="flex flex-center">
-              <q-input
-                :disable="!props.row.is_available"
-                outlined
-                style="min-width: 50px; max-width: 50px; display: inline;"
-                dense
-                v-model="props.row.quantity"
-              ></q-input>
-
-            </div>
-            <div>
-              <q-btn
-                :disable="!props.row.is_available"
-                class="text-non-selectable"
-                dense
-                round
-                outline
-                size="sm"
-                color="primary"
-                icon="add"
-                @click="props.row.quantity ? props.row.quantity++ : props.row.quantity = 1"
-              ></q-btn>
-            </div>
-          </div>
         </q-td>
       </q-tr>
     </template>
@@ -110,7 +111,8 @@
         rounded
         color="primary"
         icon="workspaces"
-      ></q-btn>
+      >
+      </q-btn>
     </div>
     <div>
       <q-btn
@@ -128,7 +130,6 @@
         icon="receipt_long"
       ></q-btn>
     </div>
-
   </div>
 </template>
 
@@ -165,3 +166,12 @@ const columns = [
   },
 ]
 </script>
+
+
+<style lang="scss">
+.quantity {
+  input {
+    text-align: center;
+  }
+}
+</style>

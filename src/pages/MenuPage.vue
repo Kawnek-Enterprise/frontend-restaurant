@@ -1,6 +1,9 @@
 <template>
-  <q-page class="">
-    <order-form />
+  <q-page
+    class=""
+    padding
+  >
+    <MenuItemList />
   </q-page>
 </template>
 
@@ -8,6 +11,7 @@
 import { onMounted } from "vue";
 import { diningTable, main, menu } from "./main";
 import OrderForm from 'src/components/OrderForm.vue'
+import MenuItemList from "src/components/MenuItemList.vue";
 
 onMounted(() => {
   main.resetOrder();
