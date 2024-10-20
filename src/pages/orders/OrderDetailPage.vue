@@ -9,11 +9,15 @@
 
 <template>
   <q-page>
-    <q-card flat>
+    <q-card
+      flat
+      id="invoice"
+    >
       <q-card-section class="row justify-between text-h5">
         Invoice #{{ orders.detail.number }}
         <div>
           <q-btn
+            class="hide-on-print"
             :to="{
               name: 'edit-order',
               params: {
@@ -60,13 +64,26 @@
           flat
           bordered
           square
+          class="q-pa-xs"
         >
-          <thead class="text-left">
+          <thead class="">
             <tr>
-              <th class="">Item</th>
-              <th class="">Quantity</th>
-              <th class="">Price</th>
-              <th class="">Amount</th>
+              <th
+                class="text-left"
+                style="padding-left: 0;"
+              >Item</th>
+              <th
+                class="text-left"
+                style="padding-left: 0;"
+              >Qty</th>
+              <th
+                class="text-left"
+                style="padding-left: 0;"
+              >Price</th>
+              <th
+                class="text-left"
+                style="padding-left: 0;"
+              >Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -76,7 +93,7 @@
             >
               <q-td>
                 <!-- {{ getItemName(item.pivot.menu_item_id) }}  -->
-                item name
+                {{ item.name }}
               </q-td>
               <q-td class="">
                 {{ parseInt(item.quantity) }}
@@ -98,7 +115,7 @@
                 TOTAL AMOUNT
 
               </q-td>
-              <q-td class="text-right text-bold">
+              <q-td class=" text-bold">
                 {{ orders.total_amount.toFixed(2) }}
               </q-td>
 
@@ -140,3 +157,23 @@ onMounted(() => {
   orders.getDetail();
 })
 </script>
+<style>
+@media print {
+  body {
+    visibility: hidden;
+  }
+
+  .hide-on-print {
+    display: none;
+  }
+
+  #invoice {
+
+    visibility: visible;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+}
+</style>
