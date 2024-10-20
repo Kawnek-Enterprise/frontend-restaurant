@@ -11,6 +11,7 @@
         <q-card class="">
           <q-card-section>
             <q-img
+              style="border-radius: 1rem;"
               ratio="1.5"
               :src="`${srvUrl}${menuItem.image_path}`"
             ></q-img>
