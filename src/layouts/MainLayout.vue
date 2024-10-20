@@ -61,7 +61,9 @@
           </q-item-section>
         </q-item>
 
-        <q-item to="orders">
+        <q-item :to="{
+          name: 'orders'
+        }">
           <q-item-section>
             Orders
           </q-item-section>
