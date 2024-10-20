@@ -13,6 +13,7 @@
 
 
         <q-input
+          v-if="$route.name == 'home' || $route.name == 'edit-order'"
           dense
           borderless
           class="q-px-xs q-ml-sm "
@@ -36,7 +37,10 @@
       bordered
     >
       <q-list>
-        <q-item class="bg-primary text-white">
+        <q-item
+          class="bg-primary text-white"
+          style="height: 50px;"
+        >
           <q-item-section side>
             <q-img
               width="32px"
