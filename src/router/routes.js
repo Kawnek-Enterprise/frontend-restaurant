@@ -9,12 +9,13 @@ const routes = [
         component: () => import('pages/MenuPage.vue')
       },
       {
+        name: 'orders',
         path: 'orders',
         component: () => import('src/pages/orders/OrderPage.vue')
       },
       {
         name: 'edit-order',
-        path: 'update-order/:id',
+        path: 'orders/:id/edit',
         component: () => import('src/pages/orders/EditOrderPage.vue')
       },
       {
