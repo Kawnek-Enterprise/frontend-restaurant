@@ -9,7 +9,7 @@
       </q-inner-loading>
 
       <div v-if="!menu.loadingItems">
-        <order-form />
+        <MenuItemList />
       </div>
     </div>
 
@@ -20,6 +20,7 @@
 import { onMounted } from "vue";
 import { diningTable, menu } from "src/pages/main";
 import OrderForm from 'src/components/OrderForm.vue'
+import MenuItemList from "src/components/MenuItemList.vue";
 
 onMounted(async () => {
   menu.loadingItems = true;
