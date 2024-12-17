@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body
+  class="bg-gray-100 p-8"
+  x-data="{
+  items: [],
+  newItem: {
+    slNo: '',
+    description: '',
+    partNo: '',
+    qty: '',
+    rate: '',
+    unit: '',
+  },
+  nextSlNo: 1,
+
+  addItem() {
+    if (this.newItem.description && this.newItem.qty && this.newItem.rate) {
+      this.items.push({
+        ...this.newItem,
+        slNo: this.nextSlNo++,
+        amount: (this.newItem.qty * this.newItem.rate).toFixed(2)
+      });
+      this.newItem = {
+        slNo: '',
+        description: '',
+        partNo: '',
+        qty: '',
+        rate: '',
+        unit: '',
+      };
+      this.updateCanvas();
+    }
+  },
+
+  removeItem(index) {
+    this.items.splice(index, 1);
+    this.updateCanvas();
+  },
+
+  getTotal() {
+    return this.items.reduce((sum, item) => sum + parseFloat(item.amount), 0).toFixed(2);
+  },
+
+  async updateCanvas() {
+    await new Promise(resolve => setTimeout(resolve, 100)); // Allow DOM to update
+    const invoice = document.getElementById('invoice');
+    const canvas = await html2canvas(invoice);
+    const preview = document.getElementById('preview');
+    preview.innerHTML = '';
+    preview.appendChild(canvas);
+  }
+}"
+>
+
+  <div class="container mx-auto">
+    <!-- Input Form -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+      <div class="grid grid-cols-6 gap-4 mb-4">
+        <input
+          type="text"
+          x-model="newItem.description"
+          placeholder="Description"
+          class="border p-2 rounded"
+        >
+        <input
+          type="text"
+          x-model="newItem.partNo"
+          placeholder="Part No"
+          class="border p-2 rounded"
+        >
+        <input
+          type="number"
+          x-model="newItem.qty"
+          placeholder="Quantity"
+          class="border p-2 rounded"
+        >
+        <input
+          type="number"
+          x-model="newItem.rate"
+          placeholder="Rate"
+          class="border p-2 rounded"
+        >
+        <input
+          type="text"
+          x-model="newItem.unit"
+          placeholder="Unit"
+          class="border p-2 rounded"
+        >
+        <button
+          @click="addItem"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Add Item
+        </button>
+      </div>
+    </div>
+
+    <!-- Invoice -->
+    <div
+      id="invoice"
+      class="bg-white p-8 rounded-lg shadow-md mb-8"
+    >
+      <h1 class="text-2xl font-bold mb-6">Invoice</h1>
+
+      <table class="w-full mb-6">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="border p-2 text-left">Sl No</th>
+            <th class="border p-2 text-left">Description</th>
+            <th class="border p-2 text-left">Part No</th>
+            <th class="border p-2 text-left">Qty</th>
+            <th class="border p-2 text-left">Rate</th>
+            <th class="border p-2 text-left">Unit</th>
+            <th class="border p-2 text-left">Amount</th>
+            <th class="border p-2 text-left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template
+            x-for="(item, index) in items"
+            :key="index"
+          >
+            <tr>
+              <td
+                class="border p-2"
+                x-text="item.slNo"
+              ></td>
+              <td
+                class="border p-2"
+                x-text="item.description"
+              ></td>
+              <td
+                class="border p-2"
+                x-text="item.partNo"
+              ></td>
+              <td
+                class="border p-2"
+                x-text="item.qty"
+              ></td>
+              <td
+                class="border p-2"
+                x-text="item.rate"
+              ></td>
+              <td
+                class="border p-2"
+                x-text="item.unit"
+              ></td>
+              <td
+                class="border p-2"
+                x-text="item.amount"
+              ></td>
+              <td class="border p-2">
+                <button
+                  @click="removeItem(index)"
+                  class="text-red-500 hover:text-red-700"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+        <tfoot>
+          <tr class="font-bold">
+            <td
+              colspan="6"
+              class="border p-2 text-right"
+            >Total:</td>
+            <td
+              class="border p-2"
+              x-text="getTotal()"
+            ></td>
+            <td class="border p-2"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Preview -->
+    <div class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-xl font-bold mb-4">Live Preview</h2>
+      <div
+        id="preview"
+        class="border rounded p-4"
+      ></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      // Initial canvas update
+      setTimeout(() => {
+        const alpineData = document.querySelector('body').__x.$data;
+        alpineData.updateCanvas();
+      }, 200);
+    });
+  </script>
+</body>
+
+</html>
