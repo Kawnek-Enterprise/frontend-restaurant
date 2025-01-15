@@ -4,22 +4,32 @@
       <h3 class="q-ma-none">Menu</h3>
     </div>
     <template
-      v-for="menuItem in menu.list"
+      v-for="menuItem in menu.filteredMenuItemList"
       :key="menuItem.id"
     >
       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <q-card class="">
+        <q-card
+          flat
+          bordered
+          class="full-height"
+        >
           <q-card-section>
             <q-img
               style="border-radius: 1rem;"
-              ratio="1.5"
+              ratio="2"
+              fit="contain"
               :src="`${srvUrl}${menuItem.image_path}`"
             ></q-img>
           </q-card-section>
           <q-card-section>
-            <h5 class="q-ma-none">
-              {{ menuItem.name }}
-            </h5>
+            <div class="row justify-between items-center">
+              <div class="text-h5">
+                {{ menuItem.name }}
+              </div>
+              <div>
+                ₹{{ menuItem.price }}
+              </div>
+            </div>
 
             <div class="q-mt-md full-width row q-col-gutter-xs items-center no-wrap">
               <div>
@@ -104,6 +114,8 @@
       </div>
     </div>
   </div>
+  <order-summary />
+  <OrderInfo />
 </template>
 
 <script setup>

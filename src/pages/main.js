@@ -18,9 +18,11 @@ const menu = reactive({
   loadingItems: false,
   filter: '',
   list: [],
+  filteredMenuItemList: [],
   selectedList: [],
   getMenuItems,
   setSelectedList,
+  filterMenuItems
 })
 const diningTable = reactive({
   list: [],
@@ -78,6 +80,7 @@ async function getMenuItems() {
         }
       }
     });
+    menu.filteredMenuItemList = filterMenuItems(menu.list);
     menu.loadingItems = false;
   } catch (error) {
     menu.loadingItems = false;
@@ -106,6 +109,25 @@ function setSelectedList() {
     $q.notify('Please add menu items')
   }
 }
+
+function filterMenuItems(items, searchValue) {
+  if (!searchValue || searchValue.trim() === '') {
+    return items;
+  }
+
+  const searchTerm = searchValue.toLowerCase().trim();
+  console.log('search term is: ', searchTerm)
+  return items.filter(item => {
+    // Search in multiple fields
+    return (
+      item.name.toLowerCase().includes(searchTerm) ||
+      item.full_name.toLowerCase().includes(searchTerm) ||
+      (item.description && item.description.toLowerCase().includes(searchTerm)) ||
+      item.price.toString().includes(searchTerm)
+    );
+  });
+}
+
 export {
   menu,
   main,

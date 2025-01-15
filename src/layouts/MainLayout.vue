@@ -13,6 +13,8 @@
 
 
         <q-input
+          @update:model-value="(val) => menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val)"
+          debounce="500"
           v-if="$route.name == 'home' || $route.name == 'edit-order'"
           dense
           borderless
@@ -69,7 +71,10 @@
           </q-item-section>
         </q-item>
         <q-separator class="q-mt-md"></q-separator>
-        <q-item :href="`${serverUrl}admin`">
+        <q-item
+          target="_blank"
+          :href="`${serverUrl}admin`"
+        >
           <q-item-section>
             Admin
           </q-item-section>
