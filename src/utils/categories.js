@@ -1,4 +1,5 @@
 import { api } from "src/boot/axios";
+import { menu } from "src/pages/main";
 import { reactive } from "vue";
 
 const categories = reactive({
@@ -6,6 +7,7 @@ const categories = reactive({
   selectedCategories: {},
   getCategories,
   onClickScrollCategory,
+  onClickCategory,
 });
 export { categories };
 
@@ -30,4 +32,23 @@ function onClickScrollCategory($refs, right) {
   if (right) offset = data.left + 100;
   if (!right) offset = data.left - 100;
   $refs.categoryScroll.setScrollPosition("horizontal", offset, 300);
+}
+
+function onMouseWheelCategory() {
+  //
+}
+
+function onClickCategory(id, selected) {
+  categories.selectedCategories[id] = selected;
+  const categoryIds = [];
+  for (let key in categories.selectedCategories) {
+    if (categories.selectedCategories[key]) {
+      categoryIds.push(parseInt(key));
+    }
+  }
+  menu.filteredMenuItemList = menu.filterMenuItems(
+    menu.list,
+    menu.filter,
+    categoryIds
+  );
 }

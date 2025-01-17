@@ -10,14 +10,18 @@
       />
     </div>
     <div
-      class="col-grow "
-      style="border-radius: 16px; overflow: hidden;"
+      class="col-grow q-pa-sm"
+      id="scrollAreaContainer"
     >
 
       <q-scroll-area
         id="categoryScroll"
         ref="categoryScroll"
-        style="height: 50px; width: 100%;"
+        style="height: 36px; width: 100%; border-radius: 1rem;"
+        horizontal-bar-style="opacity: 0"
+        :horizontal-thumb-style="{
+          opacity: 0
+        }"
         :style="$q.dark.isActive ? `
   background-image:
     linear-gradient(to right, #121212, rgba(0, 128, 128, 0) 50px),
@@ -33,10 +37,13 @@
         >
 
           <div
-            v-for="category in categories.data?.data"
+            v-for="(category) in categories.data?.data"
             :key="category.id"
           >
             <q-chip
+              @click="$nextTick(() => {
+                categories.onClickCategory(category.id, category.selected)
+              })"
               style="z-index: 2;"
               clickable
               v-model:selected="category.selected"
@@ -71,6 +78,13 @@ onMounted(() => {
       rowsPerPage: Number.MAX_SAFE_INTEGER
     }
   });
+  const scrollAreaContainer = document.getElementById('scrollAreaContainer')
+  const scrollArea = document.getElementById("categoryScroll").firstChild;
+  scrollAreaContainer.addEventListener("wheel", (evt) => {
+    evt.preventDefault();
+    scrollArea.scrollLeft += evt.deltaY;
+  });
+
 })
 
 
