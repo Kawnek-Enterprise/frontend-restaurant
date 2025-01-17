@@ -82,7 +82,7 @@ async function getMenuItems() {
     menu.list.forEach((menuItem, menuItemIndex) => {
       if (orders.detail?.menu_item_orders?.constructor === Array) {
         const orderItemIndex = orders.detail.menu_item_orders.findIndex(
-          (orderItem) => orderItem.id == menuItem.id
+          (orderItem) => orderItem.menu_item_id == menuItem.id
         );
         if (orderItemIndex > -1) {
           menu.list[menuItemIndex]["quantity"] = parseInt(

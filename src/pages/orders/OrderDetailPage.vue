@@ -16,7 +16,6 @@
               }
             }"
             rounded
-            size="sm"
             color="primary"
             icon="edit"
           >
@@ -61,23 +60,23 @@
             <tr>
               <th
                 class="text-left"
-                style="padding-left: 0;"
+                style="padding-left: 1rem;"
               >Item</th>
               <th
                 class="text-left"
-                style="padding-left: 0;"
+                style="padding-left: 1rem;"
               >Qty</th>
               <th
                 class="text-left"
-                style="padding-left: 0;"
+                style="padding-left: 1rem;"
               >Price</th>
               <th
                 class="text-left"
-                style="padding-left: 0;"
+                style="padding-left: 1rem;"
               >Amount</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="table-body">
             <tr
               v-for="item in orders.detail.menu_item_orders"
               :key="item.id"
@@ -146,6 +145,16 @@ import { orders } from "./orders";
 
 onMounted(() => {
   orders.getDetail();
+  window.onbeforeprint = (event) => {
+    $q.dark.set(false);
+    setTimeout(() => {
+      $q.dark.set(!localStorage.getItem('light-theme'))
+    }, 1000);
+  };
+  window.onafterprint = (event) => {
+    $q.dark.set(!localStorage.getItem('light-theme'))
+  };
+
 })
 </script>
 <style>
@@ -159,12 +168,16 @@ onMounted(() => {
   }
 
   #invoice {
-
     visibility: visible;
     position: fixed;
     width: 100%;
     left: 0;
     top: 0;
   }
+
+  /* * {
+    color: black !important;
+    background-color: white !important;
+  } */
 }
 </style>
