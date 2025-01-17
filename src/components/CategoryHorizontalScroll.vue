@@ -1,6 +1,9 @@
 <template>
-  <div class="q-pa-md row q-col-gutter-sm items-center">
-    <div class="col-auto q-pb-sm">
+  <div class="row q-col-gutter-sm items-center">
+    <div
+      class="col-auto q-pb-sm"
+      v-if="$q.screen.gt.sm"
+    >
       <q-btn
         icon="arrow_back"
         flat
@@ -22,14 +25,6 @@
         :horizontal-thumb-style="{
           opacity: 0
         }"
-        :style="$q.dark.isActive ? `
-  background-image:
-    linear-gradient(to right, #121212, rgba(0, 128, 128, 0) 50px),
-    linear-gradient(to left, #121212, rgba(0, 128, 128, 0) 50px);`: `
-  background-image:
-    linear-gradient(to right, #fff, rgba(0, 128, 128, 0) 50px),
-    linear-gradient(to left, #fff, rgba(0, 128, 128, 0) 50px);`"
-        :visible="false"
       >
         <div
           class="row no-wrap q-col-gutter-sm "
@@ -56,7 +51,10 @@
         </div>
       </q-scroll-area>
     </div>
-    <div class="col-auto q-pb-sm">
+    <div
+      class="col-auto q-pb-sm"
+      v-if="$q.screen.gt.sm"
+    >
       <q-btn
         icon="arrow_forward"
         flat
