@@ -1,13 +1,13 @@
 <template>
   <div class="row q-col-gutter-md">
     <div class="col-12 ">
-      <h3 class="q-ma-none">Menu</h3>
+      <CategoryHorizontalScroll />
     </div>
     <template
       v-for="menuItem in menu.filteredMenuItemList"
       :key="menuItem.id"
     >
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
         <q-card
           flat
           bordered
@@ -123,6 +123,7 @@ import { main, menu, diningTable } from "src/pages/main";
 import { onMounted } from "vue";
 import OrderSummary from 'src/components/OrderSummary.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
+import CategoryHorizontalScroll from "./CategoryHorizontalScroll.vue";
 
 const srvUrl = process.env.srvUrl;
 

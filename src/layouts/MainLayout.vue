@@ -97,6 +97,7 @@ import { onMounted, ref } from 'vue'
 onMounted(() => {
   menu.getMenuItems();
   diningTable.getDiningTables();
+  $q.dark.set(true)
 })
 
 const leftDrawerOpen = ref(false)
