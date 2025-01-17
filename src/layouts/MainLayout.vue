@@ -42,8 +42,9 @@
           </div>
 
         </div>
-
-
+      </q-toolbar>
+      <q-toolbar class="text-h4">
+        <q-icon name="restaurant_menu" /> {{ $route.meta?.title }}
       </q-toolbar>
     </q-header>
 
