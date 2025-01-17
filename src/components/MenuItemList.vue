@@ -19,8 +19,18 @@
               style="border-radius: 1rem;"
               ratio="2"
               fit="contain"
-              :src="`${srvUrl}${menuItem.image_path}`"
-            ></q-img>
+              :src="`${menuItem.image_path}`"
+            >
+              <template #error>
+                <q-img
+                  style="border-radius: 1rem;"
+                  ratio="2"
+                  fit="contain"
+                  :src="`${srvUrl}${menuItem.image_path}`"
+                >
+                </q-img>
+              </template>
+            </q-img>
           </q-card-section>
           <q-card-section>
             <div class="row justify-between items-center">
