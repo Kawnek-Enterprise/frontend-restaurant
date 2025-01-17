@@ -13,6 +13,7 @@
           <div class="row q-col-gutter-sm">
             <div>
               <q-btn
+                size="sm"
                 :to="{
                   name: 'order-detail',
                   params: {
@@ -20,7 +21,6 @@
                   }
                 }"
                 rounded
-                size="sm"
                 color="primary"
                 icon="workspaces"
               >
@@ -29,6 +29,7 @@
             </div>
             <div>
               <q-btn
+                size="sm"
                 :to="{
                   name: 'edit-order',
                   params: {
@@ -36,7 +37,6 @@
                   }
                 }"
                 rounded
-                size="sm"
                 color="primary"
                 icon="edit"
               >
