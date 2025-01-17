@@ -13,7 +13,7 @@
           bordered
           class="full-height"
         >
-          <q-card-section>
+          <q-card-section v-show="main.grid">
             <q-img
               style="border-radius: 1rem;"
               ratio="2"
@@ -23,46 +23,58 @@
           </q-card-section>
           <q-card-section>
             <div class="row justify-between items-center">
-              <div class="text-h5">
+              <div style="font-size: 17px;">
                 {{ menuItem.name }}
               </div>
-              <div>
+              <div v-if="main.grid">
                 ₹{{ menuItem.price }}
               </div>
             </div>
 
-            <div class="q-mt-md full-width row q-col-gutter-xs items-center no-wrap">
-              <div>
-                <q-btn
-                  class="text-non-selectable"
-                  dense
-                  outline
-                  color="primary"
-                  icon="remove"
-                  @click="menuItem.quantity > 1 ? menuItem.quantity-- : menuItem.quantity = undefined"
-                ></q-btn>
+            <div class="row items-center">
+              <div
+                v-if="!main.grid"
+                class="col q-pt-md"
+              >
+                <div>
+                  ₹{{ menuItem.price }}
+                </div>
               </div>
+              <div class="col q-mt-md row q-col-gutter-xs items-center no-wrap">
+                <div>
+                  <q-btn
+                    size="sm"
+                    class="text-non-selectable"
+                    dense
+                    outline
+                    color="primary"
+                    icon="remove"
+                    @click="menuItem.quantity > 1 ? menuItem.quantity-- : menuItem.quantity = undefined"
+                  ></q-btn>
+                </div>
 
-              <div class="col">
-                <q-input
-                  class=" quantity"
-                  borderless
-                  :disable="!menuItem.is_available"
-                  dense
-                  v-model="menuItem.quantity"
-                ></q-input>
-              </div>
+                <div class="col">
+                  <q-input
+                    class=" quantity"
+                    borderless
+                    :disable="!menuItem.is_available"
+                    dense
+                    v-model="menuItem.quantity"
+                  ></q-input>
+                </div>
 
-              <div>
-                <q-btn
-                  :disable="!menuItem.is_available"
-                  class="text-non-selectable"
-                  dense
-                  outline
-                  color="primary"
-                  icon="add"
-                  @click="menuItem.quantity ? menuItem.quantity++ : menuItem.quantity = 1"
-                ></q-btn>
+                <div>
+                  <q-btn
+                    size="sm"
+                    :disable="!menuItem.is_available"
+                    class="text-non-selectable"
+                    dense
+                    outline
+                    color="primary"
+                    icon="add"
+                    @click="menuItem.quantity ? menuItem.quantity++ : menuItem.quantity = 1"
+                  ></q-btn>
+                </div>
               </div>
             </div>
             <div style="height: 21px">
