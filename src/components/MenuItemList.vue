@@ -79,10 +79,20 @@
     </template>
 
     <div
-      class="row q-col-gutter-xs q-pa-sm bg-white justify-end "
+      class="row q-col-gutter-xs q-pa-sm bg-white justify-between"
       style="position: fixed; width: 100vw;left: 0; bottom: 0; border-top: 1px solid #dfdfdf;"
     >
+
       <div>
+        <q-btn
+          outline
+          round
+          color="red"
+          :icon="main.grid ? 'grid_view' : 'view_list'"
+          @click="main.toggleViewLayout"
+          size="sm"
+        ></q-btn>
+
         <!-- <q-btn
           @click="() => {
             main.openInfoDialog = true;
