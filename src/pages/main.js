@@ -7,12 +7,14 @@ import { categories } from "src/utils/categories";
 const main = reactive({
   openOrderDialog: false,
   openInfoDialog: false,
+  grid: true,
   form: {
     dining_table_id: null,
     name: undefined,
   },
   onClickConfirm,
   resetOrder,
+  toggleViewLayout,
 });
 
 const menu = reactive({
@@ -142,4 +144,12 @@ function filterMenuItems(items, searchValue, categoryIds) {
   });
 }
 
+function toggleViewLayout() {
+  if (main.grid) {
+    localStorage.setItem("item-layout", "list");
+  } else {
+    localStorage.removeItem("item-layout");
+  }
+  main.grid = !main.grid;
+}
 export { menu, main, diningTable };
