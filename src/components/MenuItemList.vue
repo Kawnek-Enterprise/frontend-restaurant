@@ -54,7 +54,6 @@
               <div class="col q-mt-md row q-col-gutter-xs items-center no-wrap">
                 <div>
                   <q-btn
-                    size="sm"
                     class="text-non-selectable"
                     dense
                     outline
@@ -76,7 +75,6 @@
 
                 <div>
                   <q-btn
-                    size="sm"
                     :disable="!menuItem.is_available"
                     class="text-non-selectable"
                     dense

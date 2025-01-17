@@ -43,7 +43,7 @@ function resetOrder() {
     name: undefined,
     dining_table_id: undefined,
     room_id: undefined,
-    menu_items: [],
+    menu_item_orders: [],
   };
 }
 async function onClickConfirm() {
@@ -53,7 +53,7 @@ async function onClickConfirm() {
       {
         ...main.form,
         _method: $route.params?.id ? "patch" : "post",
-        menu_items: menu.selectedList,
+        menu_item_orders: menu.selectedList,
       }
     );
     main.resetOrder();
@@ -70,23 +70,23 @@ async function getMenuItems() {
   try {
     menu.loadingItems = true;
     let endpoint = `menu-items`;
-    if ($route.params?.id) {
+    if ($route.params?.id && $route.name == "edit-order") {
+      // orders.getDetail();
       const res = await api.get(`orders/${$route.params.id}`);
       orders.detail = res.data;
-
       main.form.dining_table_id = res.data.dining_table_id;
       main.form.name = res.data.name;
     }
     const res = await api.get(`menu-items`);
     menu.list = res.data;
     menu.list.forEach((menuItem, menuItemIndex) => {
-      if (orders.detail?.menu_items?.constructor === Array) {
-        const orderItemIndex = orders.detail.menu_items.findIndex(
+      if (orders.detail?.menu_item_orders?.constructor === Array) {
+        const orderItemIndex = orders.detail.menu_item_orders.findIndex(
           (orderItem) => orderItem.id == menuItem.id
         );
         if (orderItemIndex > -1) {
           menu.list[menuItemIndex]["quantity"] = parseInt(
-            orders.detail.menu_items[orderItemIndex].quantity
+            orders.detail.menu_item_orders[orderItemIndex].quantity
           );
         }
       }

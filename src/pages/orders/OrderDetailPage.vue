@@ -1,12 +1,3 @@
-<!-- <template>
-  <q-page padding>
-    <q-card class="flat outlined">
-
-      {{  }}
-    </q-card>
-  </q-page>
-</template> -->
-
 <template>
   <q-page>
     <q-card
@@ -88,12 +79,12 @@
           </thead>
           <tbody>
             <tr
-              v-for="item in orders.detail.menu_items"
+              v-for="item in orders.detail.menu_item_orders"
               :key="item.id"
             >
               <q-td>
                 <!-- {{ getItemName(item.pivot.menu_item_id) }}  -->
-                {{ item.name }}
+                {{ item.item_name }}
               </q-td>
               <q-td class="">
                 {{ parseInt(item.quantity) }}
