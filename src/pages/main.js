@@ -57,6 +57,10 @@ async function onClickConfirm() {
     main.resetOrder();
     $router.push("/orders");
   } catch (error) {
+    $q.notify({
+      message: error.response?.data?.message ?? error.message,
+      position: "top",
+    });
     console.error(error.message);
   }
 }
@@ -106,7 +110,10 @@ function setSelectedList() {
   menu.selectedList = [];
   menu.selectedList = menu.list.filter((val) => val.quantity > 0);
   if (menu.selectedList?.length == 0) {
-    $q.notify("Please add menu items");
+    $q.notify({
+      message: "Please add menu items",
+      position: "top-right",
+    });
   }
 }
 

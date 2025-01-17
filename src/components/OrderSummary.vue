@@ -4,7 +4,10 @@
     v-model="main.openOrderDialog"
   >
 
-    <q-card class="full-width">
+    <q-card
+      class="full-width"
+      style="min-width: 400px"
+    >
       <q-toolbar>
         <q-toolbar-title>
           Order Summary
@@ -28,7 +31,10 @@
         <q-separator></q-separator>
         <div style="background-color: white; padding: 2px; position: sticky; bottom: 0;">
           <q-btn
-            @click="main.onClickConfirm"
+            @click="() => {
+              main.openInfoDialog = true;
+              main.openOrderDialog = false;
+            }"
             class="full-width"
             label="confirm"
             color="primary"

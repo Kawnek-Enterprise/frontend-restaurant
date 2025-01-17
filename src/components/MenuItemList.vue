@@ -83,7 +83,7 @@
       style="position: fixed; width: 100vw;left: 0; bottom: 0; border-top: 1px solid #dfdfdf;"
     >
       <div>
-        <q-btn
+        <!-- <q-btn
           @click="() => {
             main.openInfoDialog = true;
           }"
@@ -94,11 +94,10 @@
           color="primary"
           icon="workspaces"
         >
-        </q-btn>
+        </q-btn> -->
       </div>
       <div>
         <q-btn
-          :disable="!main.form.dining_table_id || !main.form.name"
           @click="() => {
             menu.setSelectedList();
             if (menu.selectedList?.length > 0)
