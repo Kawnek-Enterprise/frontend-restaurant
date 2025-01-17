@@ -12,6 +12,7 @@
           flat
           bordered
           class="full-height"
+          :style="menuItem.is_available ? '' : 'opacity: 0.5;'"
         >
           <q-card-section v-show="main.grid">
             <q-img
