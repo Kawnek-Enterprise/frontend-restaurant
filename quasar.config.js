@@ -55,8 +55,11 @@ module.exports = configure(function (ctx) {
       // analyze: true,
       env: {
         srvUrl: ctx.dev //development
-          ? "http://restaurant.test/"
-          : "/",
+          ?
+          // "http://192.168.2.244:24071/"
+          "http://restaurant.test/"
+          :
+          "/",
         // srvUrl: 'URL_ADDRESS',
       },
       // rawDefine: {}
@@ -102,7 +105,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Notify", "Loading"],
+      plugins: ["Notify", "Loading",],
     },
 
     // animations: 'all', // --- includes all animations
