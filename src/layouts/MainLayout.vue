@@ -28,7 +28,7 @@
               }"
               v-model="menu.filter"
               type="text"
-              label="Search"
+              placeholder="Search"
             />
           </div>
           <div>
