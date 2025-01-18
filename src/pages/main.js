@@ -7,6 +7,7 @@ import { categories } from "src/utils/categories";
 const main = reactive({
   openOrderDialog: false,
   openInfoDialog: false,
+  loadingSubmitOrder: false,
   grid: true,
   form: {
     dining_table_id: null,
@@ -48,6 +49,7 @@ function resetOrder() {
 }
 async function onClickConfirm() {
   try {
+    main.loadingSubmitOrder = true;
     const res = await api.post(
       `orders${$route.params.id ? `/${$route.params.id}` : ""}`,
       {
@@ -58,7 +60,9 @@ async function onClickConfirm() {
     );
     main.resetOrder();
     $router.push("/orders");
+    main.loadingSubmitOrder = false;
   } catch (error) {
+    main.loadingSubmitOrder = false;
     $q.notify({
       message: error.response?.data?.message ?? error.message,
       position: "top",
