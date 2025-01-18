@@ -18,7 +18,7 @@
     >
 
       <q-scroll-area
-        id="categoryScroll"
+        id="categoryScrollArea"
         ref="categoryScroll"
         style="height: 36px; width: 100%; border-radius: 1rem;"
         horizontal-bar-style="opacity: 0"
@@ -77,7 +77,7 @@ onMounted(() => {
     }
   });
   const scrollAreaContainer = document.getElementById('scrollAreaContainer')
-  const scrollArea = document.getElementById("categoryScroll").firstChild;
+  const scrollArea = document.getElementById("categoryScrollArea").firstChild;
   scrollAreaContainer.addEventListener("wheel", (evt) => {
     evt.preventDefault();
     scrollArea.scrollLeft += evt.deltaY;
