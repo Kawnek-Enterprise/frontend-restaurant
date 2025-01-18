@@ -68,6 +68,7 @@
           </q-item-section>
         </q-item> -->
         <q-item
+          class="q-mt-sm"
           to="/"
           :active="$route.name == 'home'"
           style="border-radius: 1rem;"
@@ -78,6 +79,7 @@
         </q-item>
 
         <q-item
+          class="q-mt-sm"
           style="border-radius: 1rem;"
           :to="{
             name: 'orders'
@@ -87,7 +89,7 @@
             Orders
           </q-item-section>
         </q-item>
-        <q-separator class="q-mt-md"></q-separator>
+        <q-separator class="q-my-sm"></q-separator>
         <q-item
           style="border-radius: 1rem;"
           target="_blank"
