@@ -59,12 +59,16 @@
                     outline
                     color="primary"
                     icon="remove"
-                    @click="menuItem.quantity > 1 ? menuItem.quantity-- : menuItem.quantity = undefined"
+                    @click="() => {
+                      menuItem.quantity > 1 ? menuItem.quantity-- : menuItem.quantity = undefined
+                      nextTick(() => menu.setSelectedList())
+                    }"
                   ></q-btn>
                 </div>
 
                 <div class="col">
                   <q-input
+                    @update:model-value="nextTick(() => menu.setSelectedList())"
                     class=" quantity"
                     borderless
                     :disable="!menuItem.is_available"
@@ -81,8 +85,14 @@
                     outline
                     color="primary"
                     icon="add"
-                    @click="menuItem.quantity ? menuItem.quantity++ : menuItem.quantity = 1"
+                    @click="() => {
+                      const summaryButton = $refs.animatedSummaryButton?.$el
+                      summaryButton.classList.add('bounce-in')
+                      menuItem.quantity ? menuItem.quantity++ : menuItem.quantity = 1
+                      nextTick(() => menu.setSelectedList())
+                    }"
                   ></q-btn>
+
                 </div>
               </div>
             </div>
@@ -130,6 +140,56 @@
         ></q-btn>
       </div>
     </div> -->
+    <div class="fixed-bottom-right q-pr-lg q-pb-xl column q-col-gutter-sm">
+      <!--  -->
+      <div>
+        <q-btn
+          v-show="menu.selectedList?.length > 0"
+          @click="() => {
+            menu.setSelectedList();
+            if (menu.selectedList?.length > 0)
+              main.openOrderDialog = true;
+          }"
+          id="summary-button"
+          ref="animatedSummaryButton"
+          title="Summary"
+          round
+          color="primary"
+          icon="receipt_long"
+        ></q-btn>
+      </div>
+      <div>
+        <q-btn
+          color="primary"
+          round
+          icon="search"
+          style="z-index: 700;"
+        >
+          <q-popup-proxy
+            breakpoint="0"
+            transition-duration="300"
+            :offset="[10, 0]"
+            transition-show="jump-left"
+            transition-hide="jump-right"
+            anchor="center left"
+            self="center right"
+          >
+            <q-card class=" text-white q-pa-sm">
+              <q-input
+                @update:model-value="(val) => menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val)"
+                debounce="500"
+                autofocus
+                style="min-width: 200px"
+                dense
+                v-model="menu.filter"
+                type="text"
+                placeholder="Search"
+              />
+            </q-card>
+          </q-popup-proxy>
+        </q-btn>
+      </div>
+    </div>
   </div>
   <order-summary />
   <OrderInfo />
@@ -137,7 +197,7 @@
 
 <script setup>
 import { main, menu, diningTable } from "src/pages/main";
-import { onMounted } from "vue";
+import { nextTick, onMounted } from "vue";
 import OrderSummary from 'src/components/OrderSummary.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
 import CategoryHorizontalScroll from "./CategoryHorizontalScroll.vue";
@@ -175,5 +235,30 @@ const columns = [
   input {
     text-align: center;
   }
+}
+
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  70% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.bounce-in {
+  animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
 }
 </style>
