@@ -12,8 +12,21 @@
           flat
           bordered
           class="full-height"
-          :style="menuItem.is_available ? '' : 'opacity: 0.5;'"
+          :style="menuItem.is_available ? '' : ';'"
+          style="position: relative;"
         >
+          <div
+            v-if="!menuItem.is_available"
+            class="absolute fit  flex flex-center"
+            style="z-index: 2; background-color: rgba(0, 0, 0, 0.7); width: 100%; height: 100%; top: 0; left: 0; "
+            :style="main.grid ? 'font-size:  xx-large' : 'font-size: medium;'"
+          >
+            <div
+              class="text-red"
+              style="transform: rotate(-40deg);  font-family: 'Courier New', Courier, monospace;cursor: default"
+            >
+              NOT AVAILABLE</div>
+          </div>
           <q-card-section v-show="main.grid">
             <q-img
               style="border-radius: 1rem;"
@@ -45,13 +58,13 @@
             <div class="row items-center">
               <div
                 v-if="!main.grid"
-                class="col q-pt-md"
+                class="col q-pt-sm"
               >
                 <div>
                   ₹{{ menuItem.price }}
                 </div>
               </div>
-              <div class="col q-mt-md row q-col-gutter-xs items-center no-wrap">
+              <div class="col q-pt-sm row q-col-gutter-xs items-center no-wrap">
                 <div>
                   <q-btn
                     class="text-non-selectable"
@@ -96,14 +109,7 @@
                 </div>
               </div>
             </div>
-            <div style="height: 21px">
-              <p
-                v-show="!menuItem.is_available"
-                class="text-red text-right"
-              >
-                Not available
-              </p>
-            </div>
+
           </q-card-section>
         </q-card>
       </div>
