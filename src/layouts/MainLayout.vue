@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr fFf">
     <q-header elevated>
-      <q-toolbar class="q-py-xs">
+      <q-toolbar class="q-py-xs q-pt-md">
         <div class="row full-width items-center q-col-gutter-sm">
           <div class="col-auto">
             <q-btn
