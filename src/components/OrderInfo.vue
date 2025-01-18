@@ -1,11 +1,11 @@
 <template>
 
   <q-dialog
-    position="top"
+    position="bottom"
     v-model="main.openInfoDialog"
   >
 
-    <q-card class="full-width">
+    <q-card class="full-width q-pb-xl">
 
       <!-- <q-toolbar>
         <q-toolbar-title>
@@ -30,6 +30,7 @@
           <q-input
             dense
             outlined
+            autofocus
             class="q-mt-md"
             v-model="main.form.name"
             type="text"
@@ -40,6 +41,7 @@
           </div>
           <div class="row justify-end q-mt-md">
             <q-btn
+              :loading="main.loadingSubmitOrder"
               type="submit"
               color="primary"
               label="Create order"
