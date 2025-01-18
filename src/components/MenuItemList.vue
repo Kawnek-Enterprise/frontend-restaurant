@@ -11,7 +11,7 @@
         <q-card
           flat
           bordered
-          class="full-height"
+          class="full-height overflow-hidden"
           :style="menuItem.is_available ? '' : ';'"
           style="position: relative;"
         >
