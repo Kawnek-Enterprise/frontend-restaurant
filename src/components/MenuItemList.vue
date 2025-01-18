@@ -99,7 +99,7 @@
       </div>
     </template>
 
-    <div
+    <!-- <div
       class="row q-col-gutter-xs q-pa-sm bg-white justify-between"
       style="position: fixed; width: 100vw;left: 0; bottom: 0; border-top: 1px solid #dfdfdf;"
     >
@@ -113,19 +113,6 @@
           @click="main.toggleViewLayout"
           size="sm"
         ></q-btn>
-
-        <!-- <q-btn
-          @click="() => {
-            main.openInfoDialog = true;
-          }"
-          title="Table Info"
-          label="Table Info"
-          outline
-          rounded
-          color="primary"
-          icon="workspaces"
-        >
-        </q-btn> -->
       </div>
       <div>
         <q-btn
@@ -142,7 +129,7 @@
           icon="receipt_long"
         ></q-btn>
       </div>
-    </div>
+    </div> -->
   </div>
   <order-summary />
   <OrderInfo />

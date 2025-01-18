@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr fFf">
     <q-header elevated>
       <q-toolbar class="q-py-xs">
         <div class="row full-width items-center q-col-gutter-sm">
@@ -100,6 +100,41 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <q-footer
+      v-if="$route.name == 'edit-order' || $route.name == 'home'"
+      reveal
+      class="bg-white text-white"
+    >
+      <q-toolbar>
+        <div class="row justify-between full-width">
+          <div>
+            <q-btn
+              outline
+              round
+              color="red"
+              :icon="main.grid ? 'grid_view' : 'view_list'"
+              @click="main.toggleViewLayout"
+              size="sm"
+            ></q-btn>
+          </div>
+          <div>
+            <q-btn
+              @click="() => {
+                menu.setSelectedList();
+                if (menu.selectedList?.length > 0)
+                  main.openOrderDialog = true;
+              }"
+              title="Summary"
+              label="Summary"
+              outline
+              rounded
+              color="primary"
+              icon="receipt_long"
+            ></q-btn>
+          </div>
+        </div>
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
