@@ -103,7 +103,7 @@
     <q-footer
       v-if="$route.name == 'edit-order' || $route.name == 'home'"
       reveal
-      class="bg-white text-white"
+      class="bg-white text-white q-pb-md"
     >
       <q-toolbar>
         <div class="row justify-between full-width">

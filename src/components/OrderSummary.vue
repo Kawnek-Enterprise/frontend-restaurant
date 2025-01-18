@@ -5,7 +5,7 @@
   >
 
     <q-card
-      class="full-width"
+      class="full-width q-pb-xl"
       style="min-width: 400px"
     >
       <q-toolbar>
