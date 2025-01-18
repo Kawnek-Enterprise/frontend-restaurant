@@ -5,6 +5,7 @@ import { serverUrl } from "src/boot/main";
 import { categories } from "src/utils/categories";
 
 const main = reactive({
+  darkMode: true,
   openOrderDialog: false,
   openInfoDialog: false,
   loadingSubmitOrder: false,
@@ -113,14 +114,13 @@ async function getDiningTables() {
 }
 
 function setSelectedList() {
+  const summaryButton = document.getElementById("summary-button");
   menu.selectedList = [];
   menu.selectedList = menu.list.filter((val) => val.quantity > 0);
-  if (menu.selectedList?.length == 0) {
-    $q.notify({
-      message: "Please add menu items",
-      position: "top-right",
-    });
-  }
+
+  setTimeout(() => {
+    summaryButton.classList.remove("bounce-in");
+  }, 1000);
 }
 
 function filterMenuItems(items, searchValue, categoryIds) {
