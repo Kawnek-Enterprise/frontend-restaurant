@@ -16,7 +16,7 @@
           <div class="col">
 
           </div>
-          <div>
+          <div v-if="$route.name == 'home' || $route.name == 'edit-order'">
             <q-btn
               outline
               round
@@ -76,74 +76,42 @@
           </q-item-section>
         </q-item>
       </q-list>
-
-      <q-item
-        tag="label"
-        class="absolute-bottom  q-pa-none"
-        style="height: 60px; border-top: 1px solid #5c5c5c; "
-      >
-
-
-        <q-item-section class="q-pl-md">
-          Theme: {{ $q.dark.isActive ? 'Dark' : 'Light' }}
-        </q-item-section>
-        <q-item-section
-          side
+      <div class="absolute-bottom">
+        <q-separator></q-separator>
+        <q-item
+          tag="label"
           class="q-pa-none"
+          style="height: 60px; "
         >
-          <q-toggle
-            keep-color
-            size="xl"
-            class="text-red"
-            :model-value="main.darkMode"
-            @update:model-value="toggleTheme"
-            checked-icon="brightness_3"
-            :color="$q.dark.isActive ? 'yellow' : 'white'"
-            unchecked-icon="light_mode"
-          />
-        </q-item-section>
-      </q-item>
+
+
+          <q-item-section class="q-pl-md">
+            Theme: {{ $q.dark.isActive ? 'Dark' : 'Light' }}
+          </q-item-section>
+          <q-item-section
+            side
+            class="q-pa-none"
+          >
+            <q-toggle
+              keep-color
+              size="xl"
+              class="text-red"
+              :model-value="main.darkMode"
+              @update:model-value="toggleTheme"
+              checked-icon="brightness_3"
+              :color="$q.dark.isActive ? 'yellow' : 'white'"
+              unchecked-icon="light_mode"
+            />
+          </q-item-section>
+        </q-item>
+      </div>
+
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
 
-    <q-footer
-      v-if="false && ($route.name == 'edit-order' || $route.name == 'home')"
-      reveal
-      class="bg-white text-white q-pb-md"
-    >
-      <q-toolbar>
-        <div class="row justify-between full-width">
-          <div>
-            <q-btn
-              outline
-              round
-              color="red"
-              :icon="main.grid ? 'grid_view' : 'view_list'"
-              @click="main.toggleViewLayout"
-              size="sm"
-            ></q-btn>
-          </div>
-          <div>
-            <q-btn
-              @click="() => {
-                menu.setSelectedList();
-                if (menu.selectedList?.length > 0)
-                  main.openOrderDialog = true;
-              }"
-              title="Summary"
-              label="Summary"
-              outline
-              rounded
-              color="primary"
-              icon="receipt_long"
-            ></q-btn>
-          </div>
-        </div>
-      </q-toolbar>
-    </q-footer>
   </q-layout>
 </template>
 
