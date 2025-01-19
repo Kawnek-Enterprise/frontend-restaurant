@@ -9,6 +9,7 @@ const routes = [
         component: () => import("pages/MenuPage.vue"),
         meta: {
           title: "Menu",
+          icon: 'widgets',
         },
       },
       {
@@ -17,6 +18,7 @@ const routes = [
         component: () => import("src/pages/orders/OrderPage.vue"),
         meta: {
           title: "Orders",
+          icon: 'receipt_long',
         },
       },
       {
@@ -24,6 +26,7 @@ const routes = [
         path: "orders/:id/edit",
         component: () => import("src/pages/orders/EditOrderPage.vue"),
         meta: {
+          parents: ['orders'],
           title: "Menu",
         },
       },
@@ -32,6 +35,7 @@ const routes = [
         path: "orders/:id",
         component: () => import("src/pages/orders/OrderDetailPage.vue"),
         meta: {
+          parents: ['orders'],
           title: "Order",
         },
       },

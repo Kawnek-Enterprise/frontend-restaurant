@@ -47,56 +47,35 @@
             name: 'home'
           })"
           style="height: 74px; font-size: x-large; cursor: default !important;"
-          class="flex flex-center"
+          class="flex items-center q-pl-lg"
         >
           Kawnek Restaurant
         </div>
         <q-separator></q-separator>
-        <!-- <q-item
-          class="bg-primary text-white"
-          style="height: 50px;"
-        >
-          <q-item-section side>
-            <q-img
-              width="32px"
-              height="32px"
-              src="/icons/kawnekrestaurant-icon.png"
-            ></q-img>
-          </q-item-section>
-          <q-item-section>
-            Kawnek Restaurant
-          </q-item-section>
-        </q-item> -->
-        <q-item
-          class="q-mt-sm"
-          to="/"
-          :active="$route.name == 'home'"
-          style="border-radius: 1rem;"
-        >
-          <q-item-section>
-            Home
-          </q-item-section>
-        </q-item>
 
-        <q-item
-          class="q-mt-sm"
-          style="border-radius: 1rem;"
-          :to="{
-            name: 'orders'
-          }"
-        >
-          <q-item-section>
-            Orders
-          </q-item-section>
-        </q-item>
+        <NavItemList />
         <q-separator class="q-my-sm"></q-separator>
+
         <q-item
           style="border-radius: 1rem;"
           target="_blank"
           :href="`${serverUrl}admin`"
         >
+          <q-item-section side>
+            <q-icon
+              name="admin_panel_settings"
+              size="sm"
+            />
+          </q-item-section>
           <q-item-section>
             Admin
+          </q-item-section>
+
+          <q-item-section side>
+            <q-icon
+              name="launch"
+              size="sm"
+            />
           </q-item-section>
         </q-item>
       </q-list>
@@ -173,6 +152,7 @@
 
 <script setup>
 import { serverUrl } from 'src/boot/main';
+import NavItemList from 'src/components/NavItemList.vue';
 import { diningTable, main, menu } from 'src/pages/main';
 import { onMounted, ref } from 'vue'
 
