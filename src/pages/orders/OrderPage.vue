@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <q-table
+      class="custom-table"
       title="Orders"
       :rows="orders.list"
       :columns="columns"
@@ -8,13 +9,6 @@
       v-model:pagination="orders.pagination"
       @request="orders.getOrders"
     >
-      <template v-slot:body-cell-number="props">
-        <q-td :props="props">
-          <div class="q-pl-xs">
-            {{ props.row.number }}
-          </div>
-        </q-td>
-      </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
           <div class="row q-col-gutter-sm">
@@ -47,7 +41,6 @@
                 color="primary"
                 icon="edit"
               >
-
               </q-btn>
             </div>
           </div>
@@ -75,7 +68,7 @@ onMounted(() => {
 
 const columns = [
   {
-    label: 'Number',
+    label: 'Invoice no.',
     name: 'number',
     field: val => val.number,
     align: 'left',
@@ -96,7 +89,7 @@ const columns = [
   // },
 
   {
-    label: 'source',
+    label: 'Table',
     name: 'source',
     field: val => val.dining_table?.number ? `Table ${val.dining_table?.number}` : val.room?.name ?? 'N/A',
     align: 'left',
@@ -107,3 +100,14 @@ const columns = [
   },
 ]
 </script>
+<style lang="scss">
+.custom-table {
+  th {
+    padding: 8px !important;
+  }
+
+  td {
+    padding: 8px !important;
+  }
+}
+</style>
