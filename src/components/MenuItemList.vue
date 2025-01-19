@@ -27,7 +27,10 @@
             >
               NOT AVAILABLE</div>
           </div>
-          <q-card-section v-show="main.grid">
+          <q-card-section
+            class="q-pa-sm"
+            v-show="main.grid"
+          >
             <q-img
               style="border-radius: 1rem;"
               ratio="2"
@@ -45,7 +48,7 @@
               </template>
             </q-img>
           </q-card-section>
-          <q-card-section>
+          <q-card-section class="q-pa-sm">
             <div class="row justify-between items-center">
               <div style="font-size: 17px;">
                 {{ menuItem.name }}
