@@ -8,6 +8,13 @@
       v-model:pagination="orders.pagination"
       @request="orders.getOrders"
     >
+      <template v-slot:body-cell-number="props">
+        <q-td :props="props">
+          <div class="q-pl-xs">
+            {{ props.row.number }}
+          </div>
+        </q-td>
+      </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
           <div class="row q-col-gutter-sm">
