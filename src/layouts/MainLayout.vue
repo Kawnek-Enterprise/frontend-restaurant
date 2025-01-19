@@ -1,9 +1,6 @@
 <template>
   <q-layout view="lHh Lpr fFf">
-    <q-header
-      elevated
-      style="height: 74px"
-    >
+    <q-header elevated>
       <q-toolbar class="q-pt-md ">
         <div class="row full-width items-center q-col-gutter-sm">
           <div class="col-auto">
@@ -31,9 +28,9 @@
 
         </div>
       </q-toolbar>
-      <!-- <q-toolbar class="text-h4">
-        <q-icon name="restaurant_menu" /> {{ $route.meta?.title }}
-      </q-toolbar> -->
+      <q-toolbar>
+        <BreadcrumbPanel />
+      </q-toolbar>
     </q-header>
 
     <q-drawer
@@ -46,7 +43,7 @@
           @click="$router.push({
             name: 'home'
           })"
-          style="height: 74px; font-size: x-large; cursor: default !important;"
+          style="height: 108px; font-size: x-large; cursor: default !important;"
           class="flex items-center q-pl-lg"
         >
           Kawnek Restaurant
@@ -152,7 +149,8 @@
 
 <script setup>
 import { serverUrl } from 'src/boot/main';
-import NavItemList from 'src/components/NavItemList.vue';
+import BreadcrumbPanel from 'src/components/layout/BreadcrumbPanel.vue';
+import NavItemList from 'src/components/layout/NavItemList.vue';
 import { diningTable, main, menu } from 'src/pages/main';
 import { onMounted, ref } from 'vue'
 

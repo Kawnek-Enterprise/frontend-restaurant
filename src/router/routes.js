@@ -26,7 +26,11 @@ const routes = [
         path: "orders/:id/edit",
         component: () => import("src/pages/orders/EditOrderPage.vue"),
         meta: {
-          parents: ['orders'],
+          parents: [{
+            name: 'orders',
+            title: 'Orders',
+            icon: 'receipt_long'
+          }],
           title: "Menu",
         },
       },
@@ -35,7 +39,11 @@ const routes = [
         path: "orders/:id",
         component: () => import("src/pages/orders/OrderDetailPage.vue"),
         meta: {
-          parents: ['orders'],
+          parents: [{
+            name: 'orders',
+            title: 'Orders',
+            icon: 'receipt_long'
+          }],
           title: "Order",
         },
       },
