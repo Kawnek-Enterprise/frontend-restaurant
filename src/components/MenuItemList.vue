@@ -19,7 +19,7 @@
             v-if="!menuItem.is_available"
             class="absolute fit  flex flex-center"
             style="z-index: 2; background-color: rgba(0, 0, 0, 0.7); width: 100%; height: 100%; top: 0; left: 0; "
-            :style="main.grid ? 'font-size:  xx-large' : 'font-size: medium;'"
+            :style="main.grid ? 'font-size:  xx-large' : ''"
           >
             <div
               class="text-red"
