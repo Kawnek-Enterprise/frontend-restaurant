@@ -14,7 +14,7 @@
         }"
         v-if="currentRoute.meta?.title && !currentRoute.meta?.parents"
         class="q-mt-sm"
-        active-class="bg-primary text-white"
+        active-class="text-white shimmer"
         style="border-radius: 1rem;"
       >
         <q-item-section

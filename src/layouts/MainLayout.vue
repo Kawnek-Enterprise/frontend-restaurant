@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr fFf">
-    <q-header elevated>
+    <q-header class="shimmer">
       <q-toolbar class="q-pt-md ">
         <div class="row full-width items-center q-col-gutter-sm">
           <div class="col-auto">
@@ -159,3 +159,26 @@ function toggleTheme() {
 
 
 </script>
+
+<style>
+.shimmer {
+  background: linear-gradient(-45deg, #dd6172, #d36574, #ee7752, #e0598d);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  50% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+</style>
