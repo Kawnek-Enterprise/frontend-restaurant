@@ -14,12 +14,13 @@
         }"
         v-if="currentRoute.meta?.title && !currentRoute.meta?.parents"
         class="q-mt-sm"
-        active-class="text-white shimmer"
-        style="border-radius: 1rem;"
+        active-class="text-primary"
+        :style="currentRoute.name == $route.name ? 'border: 1px solid #f43f5e;' : ''"
+        style="border-radius: 1rem; "
       >
         <q-item-section
           side
-          :class="currentRoute.name == $route.name ? 'text-white' : ''"
+          :class="currentRoute.name == $route.name ? 'text-primary' : ''"
         >
           <q-icon
             :name="currentRoute.meta?.icon"

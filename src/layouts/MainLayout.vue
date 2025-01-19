@@ -36,8 +36,8 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      style="padding-bottom: 60px; position: relative;"
-      :class="$q.dark.isActive ? '' : 'bg-red-1'"
+      style="padding-bottom: 60px; position: relative; background-color: rgba(255, 200, 200, 0.1);"
+      :class="$q.dark.isActive ? '' : ''"
     >
       <div
         @click="$router.push({
