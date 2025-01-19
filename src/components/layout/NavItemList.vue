@@ -8,14 +8,14 @@
       :key="currentRoute.path"
     >
       <q-item
-        :active="currentRoute.name == $route.name"
+        :active="currentRoute.name == $route.name || $route.meta.active == currentRoute.name"
         :to="{
           name: currentRoute.name
         }"
         v-if="currentRoute.meta?.title && !currentRoute.meta?.parents"
         class="q-mt-sm"
         active-class="text-primary"
-        :style="currentRoute.name == $route.name ? 'border: 1px solid #f43f5e;' : ''"
+        :style="(currentRoute.name == $route.name || $route.meta.active == currentRoute.name) ? 'border: 1px solid #f43f5e;' : ''"
         style="border-radius: 1rem; "
       >
         <q-item-section
