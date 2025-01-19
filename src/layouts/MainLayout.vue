@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr fFf">
+  <q-layout view="hHh Lpr fFf">
     <q-header class="shimmer">
       <q-toolbar class="q-pt-md ">
         <div class="row full-width items-center q-col-gutter-sm">
@@ -37,17 +37,19 @@
       v-model="leftDrawerOpen"
       show-if-above
       style="padding-bottom: 60px; position: relative;"
+      :class="$q.dark.isActive ? '' : 'bg-red-1'"
     >
+      <div
+        @click="$router.push({
+          name: 'home'
+        })"
+        style="height: 108px; font-size: x-large; cursor: default !important;"
+        class="flex items-center q-pl-lg drawer-shimmer"
+      >
+        Kawnek Restaurant
+      </div>
       <q-list class="q-px-xs">
-        <div
-          @click="$router.push({
-            name: 'home'
-          })"
-          style="height: 108px; font-size: x-large; cursor: default !important;"
-          class="flex items-center q-pl-lg"
-        >
-          Kawnek Restaurant
-        </div>
+
         <q-separator></q-separator>
 
         <NavItemList />
