@@ -3,6 +3,7 @@ import { menu } from "src/pages/main";
 import { reactive } from "vue";
 
 const categories = reactive({
+  categoryIds: [],
   data: {},
   selectedCategories: {},
   getCategories,
@@ -39,16 +40,17 @@ function onMouseWheelCategory() {
 }
 
 function onClickCategory(id, selected) {
-  categories.selectedCategories[id] = selected;
-  const categoryIds = [];
-  for (let key in categories.selectedCategories) {
-    if (categories.selectedCategories[key]) {
-      categoryIds.push(parseInt(key));
-    }
+
+  if (selected) {
+    categories.data?.data.forEach(element => {
+      element.selected = element.id == id
+    });
+    categories.categoryIds = [id]
   }
+
   menu.filteredMenuItemList = menu.filterMenuItems(
     menu.list,
     menu.filter,
-    categoryIds
+    categories.categoryIds
   );
 }
