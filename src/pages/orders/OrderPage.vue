@@ -23,7 +23,7 @@
                 }"
                 rounded
                 color="primary"
-                icon="workspaces"
+                icon="receipt"
               >
 
               </q-btn>
