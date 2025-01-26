@@ -46,6 +46,8 @@ function onClickCategory(id, selected) {
       element.selected = element.id == id
     });
     categories.categoryIds = [id]
+  } else {
+    categories.categoryIds = [];
   }
 
   menu.filteredMenuItemList = menu.filterMenuItems(
