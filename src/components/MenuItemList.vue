@@ -32,11 +32,15 @@
             v-show="main.grid"
           >
             <q-img
+              no-spinner
               style="border-radius: 1rem;"
               ratio="2"
               fit="contain"
               :src="`${menuItem.image_path}`"
             >
+              <template v-slot:loading>
+                Loading image..
+              </template>
               <template #error>
                 <q-img
                   style="border-radius: 1rem;"
