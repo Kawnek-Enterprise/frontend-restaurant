@@ -185,7 +185,7 @@
           >
             <q-card class=" text-white q-pa-sm">
               <q-input
-                @update:model-value="(val) => menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val)"
+                @update:model-value="(val) => menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val, categories.categoryIds)"
                 debounce="500"
                 autofocus
                 style="min-width: 200px"
@@ -210,6 +210,7 @@ import { nextTick, onMounted } from "vue";
 import OrderSummary from 'src/components/OrderSummary.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
 import CategoryHorizontalScroll from "./CategoryHorizontalScroll.vue";
+import { categories } from "src/utils/categories";
 
 const srvUrl = process.env.srvUrl;
 

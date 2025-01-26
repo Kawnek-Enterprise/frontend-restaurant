@@ -2,8 +2,8 @@
   <q-layout view="hHh Lpr fFf">
     <q-header class="shimmer">
       <q-toolbar class="q-pt-md ">
-        <div class="row full-width items-center q-col-gutter-sm">
-          <div class="col-auto">
+        <div class="row full-width items-center">
+          <div class="">
             <q-btn
               flat
               dense
@@ -28,8 +28,10 @@
 
         </div>
       </q-toolbar>
-      <q-toolbar>
-        <BreadcrumbPanel />
+      <q-toolbar class="">
+        <div class="q-pl-sm">
+          <BreadcrumbPanel />
+        </div>
       </q-toolbar>
     </q-header>
 
