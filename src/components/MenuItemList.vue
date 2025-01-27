@@ -52,7 +52,7 @@
               </template>
             </q-img>
           </q-card-section>
-          <q-card-section class="q-pa-sm">
+          <q-card-section>
             <div class="row justify-between items-center">
               <div style="font-size: 17px;">
                 {{ menuItem.name }}
@@ -90,7 +90,6 @@
                   <q-input
                     @update:model-value="nextTick(() => menu.setSelectedList())"
                     class=" quantity"
-                    borderless
                     :disable="!menuItem.is_available"
                     dense
                     v-model="menuItem.quantity"
