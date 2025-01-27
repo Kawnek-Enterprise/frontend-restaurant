@@ -7,7 +7,27 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: `${process.env.srvUrl}v1` })
+console.log(window.location)
+let hostname;
+let subdomains;
+let firstSubdomain;
+(function () {
+  hostname = window.location.hostname;
+  subdomains = hostname.split('.').reverse();
+
+  if (subdomains.length > 2) {
+    firstSubdomain = subdomains[2];
+    console.log("First subdomain:", firstSubdomain);
+  } else {
+    console.log("No subdomain found.");
+  }
+})();
+const api = axios.create({
+  baseURL: `${process.env.srvUrl}v1`,
+  params: {
+    handle: firstSubdomain,
+  }
+})
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
