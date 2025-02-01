@@ -153,7 +153,6 @@
       </div>
     </div> -->
     <div class="fixed-bottom-right q-pr-lg q-pb-xl column q-col-gutter-sm">
-      <!--  -->
       <div>
         <q-btn
           v-show="menu.selectedList?.length > 0"
@@ -171,7 +170,7 @@
         ></q-btn>
       </div>
       <div>
-        <q-btn
+        <!-- <q-btn
           color="primary"
           round
           icon="search"
@@ -199,7 +198,7 @@
               />
             </q-card>
           </q-popup-proxy>
-        </q-btn>
+        </q-btn> -->
       </div>
     </div>
   </div>

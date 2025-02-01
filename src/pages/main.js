@@ -9,6 +9,7 @@ const main = reactive({
   openOrderDialog: false,
   openInfoDialog: false,
   loadingSubmitOrder: false,
+  showSearchField: false,
   grid: true,
   form: {
     dining_table_id: null,

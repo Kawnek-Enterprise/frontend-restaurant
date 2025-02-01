@@ -1,6 +1,9 @@
 import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
+import { categories } from 'src/utils/categories'
+import { menu } from 'src/pages/main'
+import { nextTick } from 'vue'
 
 /*
  * If not building with SSR mode, you can
@@ -25,6 +28,14 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
-
+  Router.beforeEach((to, from, next) => {
+    menu.filter = ''
+    nextTick(
+      () => {
+        menu.filteredMenuItemList = menu.filterMenuItems(menu.list, menu.filter, categories.categoryIds)
+      }
+    )
+    next()
+  })
   return Router
 })

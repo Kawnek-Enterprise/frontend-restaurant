@@ -7,7 +7,6 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-console.log(window.location)
 let hostname;
 let subdomains;
 let firstSubdomain;
@@ -17,9 +16,8 @@ let firstSubdomain;
 
   if (subdomains.length > 2) {
     firstSubdomain = subdomains[2];
-    console.log("First subdomain:", firstSubdomain);
   } else {
-    console.log("No subdomain found.");
+    // console.log("No subdomain found.");
   }
 })();
 const api = axios.create({
