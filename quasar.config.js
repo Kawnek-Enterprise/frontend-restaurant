@@ -56,8 +56,9 @@ module.exports = configure(function (ctx) {
       env: {
         srvUrl: ctx.dev //development
           ?
+          "https://restaurant.kawnek.com/"
           // "http://192.168.2.244:24071/"
-          "http://restaurant.test/"
+          // "http://restaurant.test/"
           :
           "/",
         // srvUrl: 'URL_ADDRESS',
