@@ -73,7 +73,7 @@
             style="height: 108px; font-size: x-large; cursor: default !important;"
             class="flex items-center q-pl-lg drawer-shimmer"
           >
-            Kawnek Restaurant
+            The Book Cafe
           </div>
           <q-list class="q-px-xs">
             <q-separator></q-separator>

@@ -1,8 +1,12 @@
 {
   "hosting": {
     "public": "dist/spa",
-    "site": "kawnekhotel",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "site": "thebookcafeaizawldemo",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",

@@ -1,8 +1,8 @@
 {
   "name": "app-hotel-restaurant",
   "version": "0.0.1",
-  "description": "Kawnek Restaurant Software",
-  "productName": "Kawnek Restaurant",
+  "description": "The Book Cafe Aizawl MIS",
+  "productName": "The Book Cafe Aizawl",
   "author": "ys-grouse <malsawma7777@gmail.com>",
   "private": true,
   "scripts": {
