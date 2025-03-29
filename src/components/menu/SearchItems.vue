@@ -3,6 +3,7 @@
     round
     icon="search"
     style="z-index: 700;"
+    id="search-button"
   >
     <q-popup-proxy
       breakpoint="0"

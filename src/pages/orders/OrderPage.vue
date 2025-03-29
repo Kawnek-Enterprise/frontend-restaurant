@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <q-table
+      style="max-width: 700px; margin: auto;"
       class="custom-table"
       title="Orders"
       :rows="orders.list"

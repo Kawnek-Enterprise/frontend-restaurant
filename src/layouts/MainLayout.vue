@@ -35,6 +35,7 @@
                 title="Summary"
                 rounded
                 outline
+                :label="menu.selectedList?.length > 0 ? menu.selectedList?.length : ''"
                 color="primary"
                 icon="receipt_long"
               ></q-btn>
@@ -43,8 +44,22 @@
         </div>
       </q-toolbar>
       <q-toolbar class="">
-        <div class="q-pl-sm">
+        <div class="q-pl-sm row items-center">
           <BreadcrumbPanel />
+          <div class="col q-pl-md">
+            <q-chip
+              color="primary"
+              @remove="() => {
+                menu.filter = '';
+                menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val, categories.categoryIds)
+              }"
+              v-if="menu.filter"
+              removable
+              class=""
+            >
+              {{ menu.filter }} <span style="width: 20px;"></span>
+            </q-chip>
+          </div>
         </div>
       </q-toolbar>
     </q-header>
