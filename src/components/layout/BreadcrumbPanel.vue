@@ -1,13 +1,14 @@
 <template>
   <q-breadcrumbs active-color="white">
-    <q-breadcrumbs-el
+    <SearchItems />
+    <!-- <q-breadcrumbs-el
       v-if="$route.name != 'home'"
       :to="{
         name: 'home',
       }"
       icon="home"
       label=""
-    />
+    /> -->
 
     <template v-if="Array.isArray($route.meta.parents)">
       <q-breadcrumbs-el
@@ -29,3 +30,9 @@
   </q-breadcrumbs>
 
 </template>
+
+<script setup>
+import SearchItems from '../menu/SearchItems.vue';
+
+//
+</script>

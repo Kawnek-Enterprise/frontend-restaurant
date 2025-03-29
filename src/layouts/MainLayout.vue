@@ -1,53 +1,27 @@
 <template>
   <q-layout view="hHh Lpr fFf">
-    <q-header class="shimmer">
-      <q-toolbar class="q-pt-md ">
-        <div class="row full-width items-center">
-          <div class="">
-            <q-btn
-              flat
-              dense
-              round
-              icon="menu"
-              aria-label="Menu"
-              @click="toggleLeftDrawer"
-            />
-          </div>
-          <div
-            class="col q-px-md"
-            style="height:40px"
-          >
-            <q-input
-              clearable
-              v-show="main.showSearchField"
-              @blur="main.showSearchField = false"
-              ref="searchInputRef"
-              @update:model-value="(val) => menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val, categories.categoryIds)"
-              debounce="500"
-              autofocus
-              style="min-width: 200px"
-              dense
-              v-model="menu.filter"
-              type="text"
-              placeholder="Search"
-            />
-          </div>
-          <div class="col-auto">
-            <q-btn
-              v-if="$route.name == 'home' || $route.name == 'edit-order'"
-              @click="() => {
-                main.showSearchField = true;
-                $nextTick(
-                  () => {
-                    $refs.searchInputRef.focus()
-                  }
-                )
-              }"
-              outline
-              dense
-              round
-              icon="search"
-            ></q-btn>
+    <q-header
+      behavior="mobile"
+      reveal
+      style="background-color: #121212;"
+    >
+      <q-toolbar>
+        <div class="col-12">
+          <div class="row full-width items-center q-col-gutter-sm">
+            <div class="col-auto">
+              <q-btn
+                flat
+                dense
+                round
+                icon="menu"
+                aria-label="Menu"
+                @click="toggleLeftDrawer"
+              />
+            </div>
+
+            <div class="col q-mt-sm">
+              <CategoryHorizontalScroll />
+            </div>
           </div>
         </div>
       </q-toolbar>
@@ -60,6 +34,7 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
+      behavior="mobile"
       show-if-above
       style="position: relative; background-color: rgba(255, 200, 200, 0.1);"
       :class="$q.dark.isActive ? '' : ''"
@@ -166,6 +141,7 @@
 
 <script setup>
 import { serverUrl } from 'src/boot/main';
+import CategoryHorizontalScroll from 'src/components/CategoryHorizontalScroll.vue';
 import BreadcrumbPanel from 'src/components/layout/BreadcrumbPanel.vue';
 import NavItemList from 'src/components/layout/NavItemList.vue';
 import { diningTable, main, menu } from 'src/pages/main';

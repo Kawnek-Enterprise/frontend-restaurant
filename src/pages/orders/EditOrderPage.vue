@@ -1,5 +1,5 @@
 <template>
-  <q-page class="">
+  <q-page padding>
     <div>
       <q-inner-loading :showing="menu.loadingItems">
         <q-spinner-puff

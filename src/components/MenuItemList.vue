@@ -1,8 +1,5 @@
 <template>
   <div class="row q-col-gutter-md">
-    <div class="col-12 ">
-      <CategoryHorizontalScroll />
-    </div>
     <template
       v-for="menuItem in menu.filteredMenuItemList"
       :key="menuItem.id"
