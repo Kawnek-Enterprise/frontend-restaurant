@@ -33,7 +33,8 @@
                 id="summary-button"
                 ref="animatedSummaryButton"
                 title="Summary"
-                round
+                rounded
+                outline
                 color="primary"
                 icon="receipt_long"
               ></q-btn>
