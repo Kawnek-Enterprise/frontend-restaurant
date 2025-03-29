@@ -2,7 +2,6 @@
   <q-layout view="hHh Lpr fFf">
     <q-header
       behavior="mobile"
-      reveal
       style="background-color: #121212;"
     >
       <q-toolbar>
@@ -21,6 +20,23 @@
 
             <div class="col q-mt-sm">
               <CategoryHorizontalScroll />
+            </div>
+            <div class="col-auto">
+
+              <!-- v-show="menu.selectedList?.length > 0" -->
+              <q-btn
+                @click="() => {
+                  menu.setSelectedList();
+                  if (menu.selectedList?.length > 0)
+                    main.openOrderDialog = true;
+                }"
+                id="summary-button"
+                ref="animatedSummaryButton"
+                title="Summary"
+                round
+                color="primary"
+                icon="receipt_long"
+              ></q-btn>
             </div>
           </div>
         </div>

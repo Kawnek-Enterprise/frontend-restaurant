@@ -33,7 +33,7 @@
               style="border-radius: 1rem;"
               ratio="2"
               fit="contain"
-              :src="`${menuItem.image_path}`"
+              :src="`${srvUrl}${menuItem.image_path}`"
             >
               <template v-slot:loading>
                 Loading image..
@@ -43,7 +43,7 @@
                   style="border-radius: 1rem;"
                   ratio="2"
                   fit="contain"
-                  :src="`${srvUrl}${menuItem.image_path}`"
+                  :src="`${menuItem.image_path}`"
                 >
                 </q-img>
               </template>
@@ -79,6 +79,7 @@
                     @click="() => {
                       menuItem.quantity > 1 ? menuItem.quantity-- : menuItem.quantity = undefined
                       nextTick(() => menu.setSelectedList())
+                      animateSummaryButton()
                     }"
                   ></q-btn>
                 </div>
@@ -101,11 +102,11 @@
                     outline
                     color="primary"
                     icon="add"
-                    @click="() => {
-                      const summaryButton = $refs.animatedSummaryButton?.$el
-                      summaryButton.classList.add('bounce-in')
+                    @click="(ev) => {
+                      createFlyingDiv(ev)
                       menuItem.quantity ? menuItem.quantity++ : menuItem.quantity = 1
                       nextTick(() => menu.setSelectedList())
+                      animateSummaryButton();
                     }"
                   ></q-btn>
 
@@ -117,102 +118,29 @@
         </q-card>
       </div>
     </template>
-
-    <!-- <div
-      class="row q-col-gutter-xs q-pa-sm bg-white justify-between"
-      style="position: fixed; width: 100vw;left: 0; bottom: 0; border-top: 1px solid #dfdfdf;"
-    >
-
+    <!-- <div class="fixed-bottom-right q-pr-lg q-pb-xl column q-col-gutter-sm">
       <div>
-        <q-btn
-          outline
-          round
-          color="red"
-          :icon="main.grid ? 'grid_view' : 'view_list'"
-          @click="main.toggleViewLayout"
-          size="sm"
-        ></q-btn>
+
       </div>
       <div>
-        <q-btn
-          @click="() => {
-            menu.setSelectedList();
-            if (menu.selectedList?.length > 0)
-              main.openOrderDialog = true;
-          }"
-          title="Summary"
-          label="Summary"
-          outline
-          rounded
-          color="primary"
-          icon="receipt_long"
-        ></q-btn>
       </div>
     </div> -->
-    <div class="fixed-bottom-right q-pr-lg q-pb-xl column q-col-gutter-sm">
-      <div>
-        <q-btn
-          v-show="menu.selectedList?.length > 0"
-          @click="() => {
-            menu.setSelectedList();
-            if (menu.selectedList?.length > 0)
-              main.openOrderDialog = true;
-          }"
-          id="summary-button"
-          ref="animatedSummaryButton"
-          title="Summary"
-          round
-          color="primary"
-          icon="receipt_long"
-        ></q-btn>
-      </div>
-      <div>
-        <!-- <q-btn
-          color="primary"
-          round
-          icon="search"
-          style="z-index: 700;"
-        >
-          <q-popup-proxy
-            breakpoint="0"
-            transition-duration="300"
-            :offset="[10, 0]"
-            transition-show="jump-left"
-            transition-hide="jump-right"
-            anchor="center left"
-            self="center right"
-          >
-            <q-card class=" text-white q-pa-sm">
-              <q-input
-                @update:model-value="(val) => menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val, categories.categoryIds)"
-                debounce="500"
-                autofocus
-                style="min-width: 200px"
-                dense
-                v-model="menu.filter"
-                type="text"
-                placeholder="Search"
-              />
-            </q-card>
-          </q-popup-proxy>
-        </q-btn> -->
-      </div>
-    </div>
   </div>
   <order-summary />
   <OrderInfo />
+  <FlyingImage ref="flyingImageAnimation" />
 </template>
 
 <script setup>
 import { main, menu, diningTable } from "src/pages/main";
-import { nextTick, onMounted } from "vue";
+import { nextTick, onMounted, ref } from "vue";
 import OrderSummary from 'src/components/OrderSummary.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
-import CategoryHorizontalScroll from "./CategoryHorizontalScroll.vue";
-import { categories } from "src/utils/categories";
+import FlyingImage from "src/components/menu/FlyingImage.vue";
+
 
 const srvUrl = process.env.srvUrl;
-
+const flyingImageAnimation = ref(null)
 
 const columns = [
   {
@@ -236,6 +164,141 @@ const columns = [
     label: '',
   },
 ]
+
+function addToBasket(event, imageSrc, imageAlt) {
+  if (flyingImageAnimation.value) {
+    flyingImageAnimation.value.flyToBasket(event, imageSrc, imageAlt);
+  }
+}
+function animateSummaryButton() {
+  const summaryButton = document.getElementById('summary-button');
+  summaryButton.classList.add('bounce-in')
+}
+
+
+function createFlyingDiv(event) {
+  const summaryButton = document.getElementById('summary-button');
+  if (!summaryButton) {
+    console.error("Summary button with ID 'summary-button' not found.");
+    return;
+  }
+
+  // --- Use viewport coordinates directly for fixed positioning ---
+  const startFixedX = event.clientX;
+  const startFixedY = event.clientY;
+  // --- No need to add scrollX/scrollY ---
+
+  const size = 32;
+  const duration = 500; // ms
+  const startTime = performance.now();
+
+  // Create tail particles array
+  const tailParticles = [];
+  const numberOfParticles = 10;
+
+  // --- Helper function to create divs (main and particle) ---
+  function createDivElement(isMain, index = 0) {
+    const div = document.createElement('div');
+    const currentSize = isMain ? size : size * (0.8 - index * 0.07); // Progressively smaller for particles
+    const zIndex = isMain ? 9999 : 9998 - index; // Stack particles under main
+    const initialOpacity = isMain ? 1 : (1 - index / numberOfParticles); // Fade out particles
+
+    div.style.opacity = 0.3
+    div.style.position = 'fixed'; // Use fixed positioning
+    div.style.zIndex = zIndex;
+    div.style.width = `${currentSize}px`;
+    div.style.height = `${currentSize}px`;
+    div.classList.add('flying-div'); // Add class for potential CSS styling
+    div.style.borderRadius = '50%';
+    div.style.pointerEvents = 'none';
+    div.style.opacity = initialOpacity;
+    // Consider adding background/border via CSS '.flying-div' class instead of inline styles
+    // div.style.backgroundColor = 'lightblue';
+    // div.style.boxShadow = '0 0 10px rgba(173, 216, 230, 0.7)';
+
+    // Set initial position using viewport coordinates
+    div.style.left = `${startFixedX - currentSize / 2}px`;
+    div.style.top = `${startFixedY - currentSize / 2}px`;
+
+    document.body.appendChild(div);
+    return { element: div, size: currentSize };
+  }
+
+  // Create main flying div
+  const mainDivInfo = createDivElement(true);
+  const flyingDiv = mainDivInfo.element;
+
+
+  // Create tail particles
+  for (let i = 0; i < numberOfParticles; i++) {
+    const particleInfo = createDivElement(false, i);
+    tailParticles.push({
+      element: particleInfo.element,
+      size: particleInfo.size,
+      initialOpacity: parseFloat(particleInfo.element.style.opacity), // Store initial opacity
+      delay: i * (duration / numberOfParticles) / 5 // Staggered follow delay
+    });
+  }
+
+  function animate(currentTime) {
+    const elapsedTime = currentTime - startTime;
+    const progress = Math.min(elapsedTime / duration, 1);
+
+    // --- Recalculate target's viewport position on each frame ---
+    const currentRect = summaryButton.getBoundingClientRect();
+    const targetFixedX = currentRect.left + currentRect.width / 2;
+    const targetFixedY = currentRect.top + currentRect.height / 2;
+    // --- No need to add scrollX/scrollY ---
+
+
+    // Animate main div
+    // Interpolate between starting viewport coords and current target viewport coords
+    const currentX = startFixedX + (targetFixedX - startFixedX) * progress;
+    const currentY = startFixedY + (targetFixedY - startFixedY) * progress;
+
+    flyingDiv.style.left = `${currentX - mainDivInfo.size / 2}px`;
+    flyingDiv.style.top = `${currentY - mainDivInfo.size / 2}px`;
+
+    // Add a subtle scale effect
+    const scale = 1 - (progress * 0.2); // Slight shrink as it reaches the target
+    flyingDiv.style.transform = `scale(${scale})`;
+
+    // Animate tail particles with delay
+    tailParticles.forEach((particle, index) => {
+      const particleDelay = particle.delay;
+      const particleElapsedTime = elapsedTime - particleDelay; // Time since this particle should start moving
+      const particleProgress = Math.max(0, Math.min(particleElapsedTime / (duration - particleDelay), 1)); // Progress relative to its own start time
+
+      if (particleProgress > 0) {
+        // Interpolate between starting viewport coords and current target viewport coords
+        const particleX = startFixedX + (targetFixedX - startFixedX) * particleProgress;
+        const particleY = startFixedY + (targetFixedY - startFixedY) * particleProgress;
+
+        particle.element.style.left = `${particleX - particle.size / 2}px`;
+        particle.element.style.top = `${particleY - particle.size / 2}px`;
+
+        // Fade out as they approach target (using particle's own progress)
+        let currentOpacity = particle.initialOpacity;
+        if (particleProgress > 0.7) {
+          const fadeProgress = (particleProgress - 0.7) / 0.3;
+          currentOpacity = particle.initialOpacity * (1 - fadeProgress);
+        }
+        particle.element.style.opacity = currentOpacity;
+      }
+    });
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      // Clean up
+      flyingDiv.remove();
+      tailParticles.forEach(particle => particle.element.remove());
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
 </script>
 
 
@@ -269,5 +332,9 @@ const columns = [
 
 .bounce-in {
   animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.flying-div {
+  background-color: $primary;
 }
 </style>
