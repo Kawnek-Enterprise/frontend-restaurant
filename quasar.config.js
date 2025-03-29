@@ -60,7 +60,7 @@ module.exports = configure(function (ctx) {
           // "http://192.168.2.244:24071/"
           // "http://restaurant.test/"
           :
-          "/",
+          "https://restaurant.kawnek.com/",
         // srvUrl: 'URL_ADDRESS',
       },
       // rawDefine: {}

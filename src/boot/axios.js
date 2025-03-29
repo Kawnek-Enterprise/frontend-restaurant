@@ -15,10 +15,12 @@ let firstSubdomain;
   subdomains = hostname.split('.').reverse();
 
   if (subdomains.length > 2) {
-    firstSubdomain = subdomains[2];
+    // firstSubdomain = subdomains[2];
+    firstSubdomain = 'thebookcafeaizawldemo';
   } else {
     // console.log("No subdomain found.");
   }
+  firstSubdomain = 'thebookcafeaizawldemo';
 })();
 const api = axios.create({
   baseURL: `${process.env.srvUrl}v1`,
