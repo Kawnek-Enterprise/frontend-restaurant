@@ -6,21 +6,33 @@
     >
       <q-card-section class="row justify-between text-h5">
         Invoice #{{ orders.detail.number }}
-        <div>
-          <q-btn
-            class="hide-on-print"
-            :to="{
-              name: 'edit-order',
-              params: {
-                id: $route.params.id
-              }
-            }"
-            rounded
-            color="primary"
-            icon="edit"
-          >
+        <div class="row q-col-gutter-sm">
+          <div class="col-auto">
+            <q-btn
+              class="hide-on-print"
+              @click="print"
+              rounded
+              color="primary"
+              icon="print"
+            >
 
-          </q-btn>
+            </q-btn>
+          </div>
+          <div class="col-auto">
+            <q-btn
+              class="hide-on-print"
+              :to="{
+                name: 'edit-order',
+                params: {
+                  id: $route.params.id
+                }
+              }"
+              rounded
+              color="primary"
+              icon="edit"
+            >
+            </q-btn>
+          </div>
         </div>
 
 
@@ -140,22 +152,26 @@
 
 <script setup>
 import { date } from "quasar";
-import { onMounted } from "vue";
+import { nextTick, onMounted } from "vue";
 import { orders } from "./orders";
+
 
 onMounted(() => {
   orders.getDetail();
   window.onbeforeprint = (event) => {
-    $q.dark.set(false);
-    setTimeout(() => {
-      $q.dark.set(!localStorage.getItem('light-theme'))
-    }, 1000);
+    //
   };
   window.onafterprint = (event) => {
     $q.dark.set(!localStorage.getItem('light-theme'))
   };
 
 })
+function print() {
+  $q.dark.set(false);
+  nextTick(() => {
+    window.print();
+  })
+}
 </script>
 <style>
 @media print {
