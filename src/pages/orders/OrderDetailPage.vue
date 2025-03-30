@@ -183,7 +183,7 @@ function print() {
   #invoice {
     visibility: visible;
     position: fixed;
-    width: 100%;
+    width: 210mm;
     left: 0;
     top: 0;
   }
