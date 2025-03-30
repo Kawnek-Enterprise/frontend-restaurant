@@ -16,8 +16,8 @@
     >
       <q-card class=" text-white q-pa-sm">
         <q-input
+          @focus="$event.target.select()"
           @update:model-value="(val) => menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val, categories.categoryIds)"
-          debounce="500"
           autofocus
           style="min-width: 200px"
           dense
