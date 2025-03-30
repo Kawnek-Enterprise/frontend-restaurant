@@ -48,7 +48,7 @@
           </div>
           <div class="col-auto">
             <q-btn
-              v-show="$q.screen.lt.md && menu.selectedList?.length > 0"
+              v-if="$q.screen.lt.md && menu.selectedList?.length > 0"
               @click="() => {
                 menu.setSelectedList();
                 if (menu.selectedList?.length > 0)

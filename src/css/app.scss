@@ -9,3 +9,21 @@
   touch-action: pan-x pan-y;
   height: 100%;
 }
+
+//
+.fade-animation {
+  pointer-events: none;
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.fade-animation {
+  animation: fadeOut 1s forwards;
+}

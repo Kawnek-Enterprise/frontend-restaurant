@@ -11,6 +11,11 @@ onMounted(() => {
   window.$q = useQuasar();
   window.$route = useRoute();
   window.$router = useRouter();
+  const preloadWrapper = document.querySelector('.preload-wrapper')
+  console.log('preloadWrapper: ', preloadWrapper)
+  setTimeout(() => {
+    preloadWrapper.classList.add('fade-animation')
+  }, 500);
 })
 defineOptions({
   name: 'App'

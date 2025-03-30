@@ -12,6 +12,8 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
     <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (ctx.mode.cordova || ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>"> -->
+    <link rel="preload" href="/assets/css/preload.css" as="style" />
+    <link rel="stylesheet" href="/assets/css/preload.css" />
 
     <link
       rel="icon"
@@ -40,6 +42,9 @@
     <link rel="icon" type="image/ico" href="favicon.ico" />
   </head>
   <body>
+    <div class="preload-wrapper">
+      <div class="loader"></div>
+    </div>
     <!-- quasar:entry-point -->
   </body>
 </html>

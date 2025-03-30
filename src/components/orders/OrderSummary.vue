@@ -1,6 +1,6 @@
 <template>
   <q-card
-    class="full-width q-pb-xl"
+    class="full-width"
     style="min-width: min(400px, 100vw)"
   >
     <q-toolbar>
@@ -9,7 +9,7 @@
       </q-toolbar-title>
     </q-toolbar>
     <q-separator></q-separator>
-    <q-card-section style="">
+    <q-card-section class="q-pt-xl">
       <q-item
         v-for="(item, index) in menu.selectedList"
         :key="index"
@@ -51,16 +51,21 @@
       </div>
       <template v-if="menu.selectedList?.length > 0">
         <q-separator></q-separator>
-        <div style="background-color: white; padding: 2px; position: sticky; bottom: 0;">
-          <q-btn
-            @click="() => {
-              main.openInfoDialog = true;
-              main.openOrderDialog = false;
-            }"
-            class="full-width"
-            label="confirm"
-            color="primary"
-          ></q-btn>
+        <div
+          class="bg-dark q-pb-md"
+          style="position: sticky; bottom: 0;"
+        >
+          <div style="background-color: white; padding: 2px; position: sticky; bottom: 0;">
+            <q-btn
+              @click="() => {
+                main.openInfoDialog = true;
+                main.openOrderDialog = false;
+              }"
+              class="full-width"
+              label="confirm"
+              color="primary"
+            ></q-btn>
+          </div>
         </div>
       </template>
     </q-card-section>

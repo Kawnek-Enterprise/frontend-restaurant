@@ -120,6 +120,7 @@ function setSelectedList() {
   menu.selectedList = menu.list.filter((val) => val.quantity > 0);
 
   setTimeout(() => {
+    if (!summaryButton) return;
     summaryButton.classList.remove("bounce-in");
   }, 1000);
 }

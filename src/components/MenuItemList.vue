@@ -172,6 +172,7 @@ function addToBasket(event, imageSrc, imageAlt) {
 }
 function animateSummaryButton() {
   const summaryButton = document.getElementById('summary-button');
+  if (!summaryButton) return;
   summaryButton.classList.add('bounce-in')
 }
 
@@ -179,7 +180,6 @@ function animateSummaryButton() {
 function createFlyingDiv(event) {
   const summaryButton = document.getElementById('summary-button');
   if (!summaryButton) {
-    console.error("Summary button with ID 'summary-button' not found.");
     return;
   }
 
