@@ -16,12 +16,12 @@
             <div>
               <q-btn
                 size="sm"
-                :to="{
+                @click="$router.push({
                   name: 'order-detail',
                   params: {
                     id: props.row.id
                   }
-                }"
+                })"
                 rounded
                 color="primary"
                 icon="receipt"
@@ -32,12 +32,12 @@
             <div>
               <q-btn
                 size="sm"
-                :to="{
+                @click="$router.push({
                   name: 'edit-order',
                   params: {
                     id: props.row.id
                   }
-                }"
+                })"
                 rounded
                 color="primary"
                 icon="edit"
