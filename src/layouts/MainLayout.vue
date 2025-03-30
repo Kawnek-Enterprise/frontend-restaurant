@@ -30,7 +30,7 @@
         </div>
       </q-toolbar>
       <q-toolbar class="">
-        <div class="q-pl-sm row items-center">
+        <div class="q-pl-sm row items-center full-width">
           <BreadcrumbPanel />
           <div class="col q-pl-md">
             <q-chip
@@ -45,6 +45,23 @@
             >
               {{ menu.filter }} <span style="width: 20px;"></span>
             </q-chip>
+          </div>
+          <div class="col-auto">
+            <q-btn
+              v-show="$q.screen.lt.md && menu.selectedList?.length > 0"
+              @click="() => {
+                menu.setSelectedList();
+                if (menu.selectedList?.length > 0)
+                  main.openOrderDialog = true;
+              }"
+              id="summary-button"
+              ref="animatedSummaryButton"
+              title="Summary"
+              rounded
+              :label="menu.selectedList?.length > 0 ? menu.selectedList?.length : ''"
+              color="primary"
+              icon="receipt_long"
+            ></q-btn>
           </div>
         </div>
       </q-toolbar>
@@ -153,22 +170,7 @@
     <q-page-container>
 
       <router-view />
-      <q-btn
-        v-if="$q.screen.lt.md"
-        style="position: fixed; bottom: 50px; right: 20px;"
-        @click="() => {
-          menu.setSelectedList();
-          if (menu.selectedList?.length > 0)
-            main.openOrderDialog = true;
-        }"
-        id="summary-button"
-        ref="animatedSummaryButton"
-        title="Summary"
-        rounded
-        :label="menu.selectedList?.length > 0 ? menu.selectedList?.length : ''"
-        color="primary"
-        icon="receipt_long"
-      ></q-btn>
+
       <div
         v-if="$q.screen.gt.sm"
         style="position: fixed; top: 0; right: 0; width: 400px; z-index: 3000;"
@@ -184,7 +186,7 @@
       side="right"
       bordered
       behavior="desktop"
-      width="400"
+      :width="400"
     >
 
     </q-drawer>

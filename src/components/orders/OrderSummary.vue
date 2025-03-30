@@ -18,7 +18,29 @@
           {{ item.name }}
         </q-item-section>
         <q-item-section side>
-          {{ item.quantity }}
+          <div class="row items-center">
+            <q-btn
+              round
+              icon="remove"
+              size="xs"
+              color="primary"
+              @click="() => {
+                item.quantity > 1 ? item.quantity-- : item.quantity = undefined
+                nextTick(() => menu.setSelectedList())
+              }"
+            ></q-btn>
+            <div class="q-px-xs">{{ item.quantity }}</div>
+            <q-btn
+              round
+              icon="add"
+              size="xs"
+              color="primary"
+              @click="(ev) => {
+                item.quantity ? item.quantity++ : item.quantity = 1
+                nextTick(() => menu.setSelectedList())
+              }"
+            ></q-btn>
+          </div>
         </q-item-section>
       </q-item>
       <div
@@ -47,6 +69,7 @@
 <script setup>
 import { main, menu } from 'src/pages/main';
 import AnimatedCoffee from '../elements/AnimatedCoffee.vue';
+import { nextTick } from 'vue';
 
 
 </script>
