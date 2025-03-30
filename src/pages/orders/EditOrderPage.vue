@@ -18,15 +18,17 @@
 
 <script setup>
 import { onMounted } from "vue";
-import { diningTable, menu } from "src/pages/main";
-import OrderForm from 'src/components/OrderForm.vue'
+import { diningTable, main, menu } from "src/pages/main";
 import MenuItemList from "src/components/MenuItemList.vue";
 
 onMounted(async () => {
   menu.loadingItems = true;
   await menu.getMenuItems();
   await diningTable.getDiningTables();
+  menu.setSelectedList();
   menu.loadingItems = false;
-
+  if ($q.screen.lt.md) {
+    main.openOrderDialog = true;
+  }
 })
 </script>
