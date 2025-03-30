@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh Lpr fFf">
+  <q-layout view="hHr Lpr fFr">
     <q-header
       behavior="mobile"
       style="background-color: #121212;"
@@ -24,21 +24,7 @@
             <div class="col-auto">
 
               <!-- v-show="menu.selectedList?.length > 0" -->
-              <q-btn
-                @click="() => {
-                  menu.setSelectedList();
-                  if (menu.selectedList?.length > 0)
-                    main.openOrderDialog = true;
-                }"
-                id="summary-button"
-                ref="animatedSummaryButton"
-                title="Summary"
-                rounded
-                outline
-                :label="menu.selectedList?.length > 0 ? menu.selectedList?.length : ''"
-                color="primary"
-                icon="receipt_long"
-              ></q-btn>
+              <SearchItems />
             </div>
           </div>
         </div>
@@ -165,8 +151,43 @@
     </q-drawer>
 
     <q-page-container>
+
       <router-view />
+      <q-btn
+        v-if="$q.screen.lt.md"
+        style="position: fixed; bottom: 50px; right: 20px;"
+        @click="() => {
+          menu.setSelectedList();
+          if (menu.selectedList?.length > 0)
+            main.openOrderDialog = true;
+        }"
+        id="summary-button"
+        ref="animatedSummaryButton"
+        title="Summary"
+        rounded
+        :label="menu.selectedList?.length > 0 ? menu.selectedList?.length : ''"
+        color="primary"
+        icon="receipt_long"
+      ></q-btn>
+      <div
+        v-if="$q.screen.gt.sm"
+        style="position: fixed; top: 0; right: 0; width: 400px; z-index: 3000;"
+      >
+        <OrderSummary />
+      </div>
     </q-page-container>
+
+    <q-drawer
+      v-if="$q.screen.gt.sm"
+      show-if-above
+      :model-value="true"
+      side="right"
+      bordered
+      behavior="desktop"
+      width="400"
+    >
+
+    </q-drawer>
 
   </q-layout>
 </template>
@@ -176,6 +197,8 @@ import { serverUrl } from 'src/boot/main';
 import CategoryHorizontalScroll from 'src/components/CategoryHorizontalScroll.vue';
 import BreadcrumbPanel from 'src/components/layout/BreadcrumbPanel.vue';
 import NavItemList from 'src/components/layout/NavItemList.vue';
+import SearchItems from 'src/components/menu/SearchItems.vue';
+import OrderSummary from 'src/components/orders/OrderSummary.vue';
 import { diningTable, main, menu } from 'src/pages/main';
 import { categories } from 'src/utils/categories';
 import { onMounted, ref } from 'vue'

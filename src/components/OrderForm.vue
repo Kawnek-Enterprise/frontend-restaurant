@@ -137,7 +137,7 @@
 <script setup>
 import { main, menu, diningTable } from "src/pages/main";
 import { onMounted } from "vue";
-import OrderSummary from 'src/components/OrderSummary.vue'
+import OrderSummary from 'src/components/orders/OrderSummaryDialog.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
 
 const srvUrl = process.env.srvUrl;

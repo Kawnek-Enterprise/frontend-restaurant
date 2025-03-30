@@ -134,7 +134,7 @@
 <script setup>
 import { main, menu, diningTable } from "src/pages/main";
 import { nextTick, onMounted, ref } from "vue";
-import OrderSummary from 'src/components/OrderSummary.vue'
+import OrderSummary from 'src/components/orders/OrderSummaryDialog.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
 import FlyingImage from "src/components/menu/FlyingImage.vue";
 

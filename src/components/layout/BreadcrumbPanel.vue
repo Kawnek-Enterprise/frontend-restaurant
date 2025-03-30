@@ -1,6 +1,6 @@
 <template>
   <q-breadcrumbs active-color="white">
-    <SearchItems />
+    <!-- <SearchItems /> -->
     <!-- <q-breadcrumbs-el
       v-if="$route.name != 'home'"
       :to="{
