@@ -69,20 +69,6 @@
                 </div>
               </div>
               <div class="col q-pt-sm row q-col-gutter-xs items-center no-wrap">
-                <div>
-                  <q-btn
-                    class="text-non-selectable"
-                    dense
-                    outline
-                    color="primary"
-                    icon="remove"
-                    @click="() => {
-                      menuItem.quantity > 1 ? menuItem.quantity-- : menuItem.quantity = undefined
-                      nextTick(() => menu.setSelectedList())
-                      animateSummaryButton()
-                    }"
-                  ></q-btn>
-                </div>
 
                 <div class="col">
                   <q-input
@@ -93,22 +79,58 @@
                     v-model="menuItem.quantity"
                   ></q-input>
                 </div>
-
-                <div>
+                <!-- <div>
                   <q-btn
-                    :disable="!menuItem.is_available"
-                    class="text-non-selectable"
+                    class="text-non-selectable q-px-md"
                     dense
                     outline
+                    size="sm"
                     color="primary"
-                    icon="add"
-                    @click="(ev) => {
-                      createFlyingDiv(ev)
-                      menuItem.quantity ? menuItem.quantity++ : menuItem.quantity = 1
+                    icon="remove"
+                    @click="() => {
+                      menuItem.quantity > 1 ? menuItem.quantity-- : menuItem.quantity = undefined
                       nextTick(() => menu.setSelectedList())
-                      animateSummaryButton();
+                      animateSummaryButton()
                     }"
                   ></q-btn>
+                </div> -->
+                <div class="column q-col-gutter-xs">
+                  <div>
+
+                    <q-btn
+                      class="text-non-selectable q-px-md"
+                      size="sm"
+                      :disable="!menuItem.is_available"
+                      dense
+                      outline
+                      color="primary"
+                      icon="add"
+                      @click="(ev) => {
+                        menuItem.quantity ? menuItem.quantity++ : menuItem.quantity = 1
+                        animateSummaryButton();
+                        nextTick(() => {
+                          menu.setSelectedList()
+                          createFlyingDiv(ev)
+                        })
+
+                      }"
+                    ></q-btn>
+                  </div>
+                  <div>
+                    <q-btn
+                      class="text-non-selectable q-px-md"
+                      dense
+                      outline
+                      size="sm"
+                      color="primary"
+                      icon="remove"
+                      @click="() => {
+                        menuItem.quantity > 1 ? menuItem.quantity-- : menuItem.quantity = undefined
+                        nextTick(() => menu.setSelectedList())
+                        animateSummaryButton()
+                      }"
+                    ></q-btn>
+                  </div>
 
                 </div>
               </div>

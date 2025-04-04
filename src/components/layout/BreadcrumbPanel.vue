@@ -1,15 +1,5 @@
 <template>
   <q-breadcrumbs active-color="white">
-    <!-- <SearchItems /> -->
-    <!-- <q-breadcrumbs-el
-      v-if="$route.name != 'home'"
-      :to="{
-        name: 'home',
-      }"
-      icon="home"
-      label=""
-    /> -->
-
     <template v-if="Array.isArray($route.meta.parents)">
       <q-breadcrumbs-el
         :to="{

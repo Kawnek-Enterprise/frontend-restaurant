@@ -21,18 +21,35 @@
             <div class="col q-mt-sm">
               <CategoryHorizontalScroll />
             </div>
-            <div class="col-auto">
 
-              <!-- v-show="menu.selectedList?.length > 0" -->
-              <SearchItems />
-            </div>
           </div>
         </div>
       </q-toolbar>
       <q-toolbar class="">
-        <div class="q-pl-sm row items-center full-width">
-          <BreadcrumbPanel />
-          <div class="col q-pl-md">
+        <div class="q-pl-sm row items-center justify-between full-width">
+          <div class="col-auto">
+
+            <q-input
+              v-if="$route.name == 'home' || $route.name == 'edit-order'"
+              @focus="$event.target?.select()"
+              @update:model-value="(val) => menu.filteredMenuItemList = menu.filterMenuItems(menu.list, val, categories.categoryIds)"
+              autofocus
+              outlined
+              style="min-width: 200px"
+              dense
+              v-model="menu.filter"
+              type="text"
+              placeholder="Search"
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+
+          </div>
+
+          <!-- <BreadcrumbPanel /> -->
+          <!-- <div class="col q-pl-md">
             <q-chip
               color="primary"
               @remove="() => {
@@ -45,7 +62,7 @@
             >
               {{ menu.filter }} <span style="width: 20px;"></span>
             </q-chip>
-          </div>
+          </div> -->
           <div class="col-auto">
             <q-btn
               v-if="$q.screen.lt.md && menu.selectedList?.length > 0"
