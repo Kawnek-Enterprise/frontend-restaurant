@@ -22,10 +22,29 @@ const main = reactive({
 
 const menu = reactive({
   loadingItems: false,
+  showDetailDialog: false,
   filter: "",
   list: [],
   filteredMenuItemList: [],
   selectedList: [],
+  selectedItem: {
+    "id": '',
+    "name": '',
+    "packed_price": '',
+    "packing_price": '',
+    "price": '',
+    "full_name": '',
+    "slug": '',
+    "image_path": '',
+    "photos": [],
+    "description": '',
+    "is_available": '',
+    "category_id": '',
+    "restaurant_id": '',
+    "created_at": '',
+    "updated_at": '',
+    "deleted_at": '',
+  },
   getMenuItems,
   setSelectedList,
   filterMenuItems,
@@ -158,4 +177,7 @@ function toggleViewLayout() {
   }
   main.grid = !main.grid;
 }
+
+
+
 export { menu, main, diningTable };

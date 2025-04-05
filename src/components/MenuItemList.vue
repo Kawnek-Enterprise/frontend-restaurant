@@ -29,6 +29,13 @@
             v-show="main.grid"
           >
             <q-img
+              @click="() => {
+                console.log('dfdf');
+                menu.selectedItem = menuItem;
+                $nextTick(
+                  () => menu.showDetailDialog = true
+                )
+              }"
               no-spinner
               style="border-radius: 1rem;"
               ratio="2"
@@ -149,6 +156,7 @@
     </div> -->
   </div>
   <OrderSummaryDialog />
+  <DetailDialog />
   <OrderInfo />
   <FlyingImage ref="flyingImageAnimation" />
 </template>
@@ -159,6 +167,7 @@ import { nextTick, onMounted, ref } from "vue";
 import OrderSummaryDialog from 'src/components/orders/OrderSummaryDialog.vue'
 import OrderInfo from 'src/components/OrderInfo.vue'
 import FlyingImage from "src/components/menu/FlyingImage.vue";
+import DetailDialog from "./menu/DetailDialog.vue";
 
 
 const srvUrl = process.env.srvUrl;
