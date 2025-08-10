@@ -92,7 +92,6 @@
               :key="item.id"
             >
               <q-td>
-                <!-- {{ getItemName(item.pivot.menu_item_id) }}  -->
                 {{ item.item_name }}
               </q-td>
               <q-td class="">
@@ -104,8 +103,7 @@
               <q-td>
                 {{ item.amount }}
               </q-td>
-              <!-- <q-td class=""> - </td>
-                <q-td class=""> - </td> -->
+
             </tr>
             <tr>
               <q-td
@@ -124,7 +122,7 @@
         </q-markup-table>
       </q-card-section>
 
-      <q-card-section class="text-right">
+      <!-- <q-card-section class="text-right">
         <q-item label="Subtotal">
           <q-item-section class="text-right">
             -
@@ -143,22 +141,139 @@
             -
           </q-item-section>
         </q-item>
-      </q-card-section>
+      </q-card-section> -->
+      <div class="column flex flex-center">
+        <h4 class="q-my-none">
+          Scan to pay
+        </h4>
+        <div
+          class="q-pa-md"
+          style="width: min-content;"
+        >
+
+          <div
+            class="q-pa-sm bg-white"
+            style="border-radius: 1rem; overflow: hidden; "
+          >
+
+            <QRCodeVue3
+              :corners-dot-options="qrOptions.cornersDotOptions"
+              :corners-square-options="qrOptions.cornersSquareOptions"
+              :dots-options="qrOptions.dotsOptions"
+              v-if="orders.total_amount > 0"
+              :value="paymentLink"
+            />
+          </div>
+
+        </div>
+      </div>
     </q-card>
   </q-page>
 </template>
 
 <script setup>
 import { date } from "quasar";
-import { nextTick, onMounted } from "vue";
+import { computed, nextTick, onMounted, ref } from "vue";
 import { orders } from "./orders";
+import QRCodeVue3 from "qrcode-vue3";
+import UPILogo from "src/components/elements/UPILogo.vue";
+const showCode = ref(false);
+const paymentLink = computed(() => `upi://pay?pa=blalmalsawma@sbi&pn=B LALMALSAWMA&am=${orders.total_amount}&cu=INR`)
+const qrOptions = ref({
+  "type": "canvas",
+  "shape": "square",
+  "width": 300,
+  "height": 300,
+  "data": `upi://pay?pa=blalmalsawma@sbi&pn=Kawnek Enterprise&am=${orders.total_amount}&cu=INR`,
+  "margin": 0,
+  "qrOptions": {
+    "typeNumber": "0",
+    "mode": "Byte",
+    "errorCorrectionLevel": "Q"
+  },
+  "imageOptions": {
+    "saveAsBlob": true,
+    "hideBackgroundDots": true,
+    "imageSize": 0.4,
+    "margin": 0
+  },
+  "dotsOptions": {
+    "type": "extra-rounded",
+    "color": "#f43f5e",
+    "roundSize": true
+  },
+  "backgroundOptions": {
+    "round": 0,
+    "color": "#00FFFFFF"
+  },
+  // "image": "10cc19bd484118dbcd0a7886a38ceddc.png",
+  "dotsOptionsHelper": {
+    "colorType": {
+      "single": true,
+      "gradient": false
+    },
+    "gradient": {
+      "linear": true,
+      "radial": false,
+      "color1": "#6a1a4c",
+      "color2": "#6a1a4c",
+      "rotation": "0"
+    }
+  },
+  "cornersSquareOptions": {
+    "type": "extra-rounded",
+    "color": "#f43f5e"
+  },
+  "cornersSquareOptionsHelper": {
+    "colorType": {
+      "single": true,
+      "gradient": false
+    },
+    "gradient": {
+      "linear": true,
+      "radial": false,
+      "color1": "#000000",
+      "color2": "#000000",
+      "rotation": "0"
+    }
+  },
+  "cornersDotOptions": {
+    "type": "",
+    "color": "#f43f5e"
+  },
+  "cornersDotOptionsHelper": {
+    "colorType": {
+      "single": true,
+      "gradient": false
+    },
+    "gradient": {
+      "linear": true,
+      "radial": false,
+      "color1": "#000000",
+      "color2": "#000000",
+      "rotation": "0"
+    }
+  },
+  "backgroundOptionsHelper": {
+    "colorType": {
+      "single": true,
+      "gradient": false
+    },
+    "gradient": {
+      "linear": true,
+      "radial": false,
+      "color1": "#ffffff",
+      "color2": "#ffffff",
+      "rotation": "0"
+    }
+  }
+})
 
 onMounted(() => {
   orders.getDetail();
   window.onafterprint = (event) => {
     $q.dark.set(!localStorage.getItem('light-theme'))
   };
-
 })
 
 function print() {
