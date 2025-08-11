@@ -27,3 +27,165 @@
 .fade-animation {
   animation: fadeOut 1s forwards;
 }
+
+.invoice {
+  background-color: white;
+}
+
+// invoice a4
+
+.invoice-a4 {
+  width: 210mm;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.invoice-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.print-button,
+.edit-button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.edit-button {
+  background-color: #26a69a;
+}
+
+.invoice-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.billed-to h4,
+.invoice-date h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.billed-to p,
+.invoice-date p {
+  margin: 5px 0;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.invoice-table th,
+.invoice-table td {
+  background-color: white !important;
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.invoice-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.total-row {
+  font-weight: bold;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.qr-section {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.qr-section h4 {
+  margin-bottom: 15px;
+}
+
+.qr-container {
+  display: inline-block;
+  padding: 10px;
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hide-on-print {
+  display: block;
+}
+
+@media print {
+  body {
+    visibility: hidden;
+  }
+
+  .hide-on-print {
+    display: none;
+  }
+
+  .invoice-a4 {
+    visibility: visible;
+    position: fixed;
+    width: 210mm;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    margin: 0;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark-mode .invoice-table th {
+  background-color: #333;
+}
+
+.dark-mode .invoice-table th,
+.dark-mode .invoice-table td {
+  border-color: #444;
+}
+// end invoice a4
