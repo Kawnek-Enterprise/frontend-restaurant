@@ -19,7 +19,8 @@
     "quasar": "^2.8.0",
     "vue": "^3.4.18",
     "vue-qrcode-reader": "^5.7.0",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue-to-print": "^1.4.0"
   },
   "devDependencies": {
     "eslint": "^8.11.0",
