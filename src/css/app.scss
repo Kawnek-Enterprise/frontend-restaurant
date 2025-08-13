@@ -173,7 +173,7 @@
 }
 @media only screen and (max-width: 1279px) {
   .invoice-a4 {
-    display: none;
+    // display: none;
   }
 }
 .invoice-a4 .invoice-header {
@@ -276,6 +276,7 @@
   }
 
   .invoice-a4 {
+    position: static;
     visibility: visible;
     width: 210mm;
     padding: 20px;

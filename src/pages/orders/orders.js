@@ -1,5 +1,6 @@
 import { api } from "src/boot/axios";
 import { reactive } from "vue";
+import domtoimage from 'dom-to-image-more'
 
 const orders = reactive({
   list: [],
@@ -51,9 +52,29 @@ async function getDetail() {
       (p, c) => p + parseFloat(c.amount),
       0
     );
+    drawInvoice();
   } catch (error) {
     console.error(error.message);
   }
 }
 
+function drawInvoice() {
+  const invoiceA4 = document.getElementById('invoice-a4');
+  const invoiceThermal = document.getElementById('invoice-thermal');
+  const a4Image = document.getElementById('invoice-a4-img');
+  const thermalImage = document.getElementById('invoice-thermal-img');
+  domtoimage.toJpeg(invoiceA4)
+    .then(
+      function (dataUrl) {
+        a4Image.src = dataUrl;
+      }
+    )
+
+  domtoimage.toJpeg(invoiceThermal)
+    .then(
+      function (dataUrl) {
+        thermalImage.src = dataUrl;
+      }
+    )
+}
 export { orders };
