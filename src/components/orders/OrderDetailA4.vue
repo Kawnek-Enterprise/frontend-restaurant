@@ -11,7 +11,7 @@
       </div>
 
     </div>
-    <div style="height: 0; width: 0; overflow: hidden;">
+    <div style="overflow: hidden;height: 0; width: 0;">
       <div
         id="invoice-a4"
         class="invoice invoice-a4"
@@ -134,6 +134,29 @@ const qrOptions = {
     color: "#f43f5e",
   },
 };
+
+//risk
+// const drawInvoice = () => {
+//   const invoiceA4 = document.getElementById('invoice-a4');
+//   const a4Image = document.getElementById('invoice-a4-img');
+
+//   html2canvas(invoiceA4).then(canvas => {
+//     a4Image.src = canvas.toDataURL('image/jpeg');
+//   });
+// };
+
+// watch(
+//   () => orders.detail,
+//   (newVal) => {
+//     if (newVal) {
+//       nextTick(() => {
+//         drawInvoice();
+//       });
+//     }
+//   },
+//   { deep: true }
+// );
+//till here
 
 const paymentLink = computed(() => {
   return `upi://pay?pa=blalmalsawma@sbi&pn=B LALMALSAWMA&am=${orders.total_amount}&cu=INR`;
